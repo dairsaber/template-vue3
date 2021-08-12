@@ -10,9 +10,13 @@ export default defineComponent({
   },
   setup: (props) => {
     const count = ref(0);
+
+    const handleCountup = () => {
+      count.value++;
+    };
     return () => (
       <div>
-        {count.value}
+        <button onClick={handleCountup}>{count.value}</button>
         <p>{props.msg}</p>
       </div>
     );
