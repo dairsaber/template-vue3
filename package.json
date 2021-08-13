@@ -10,7 +10,8 @@
     "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\""
   },
   "dependencies": {
-    "vue": "^3.2.2"
+    "vue": "^3.2.2",
+    "vue-router": "4.0.11"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
