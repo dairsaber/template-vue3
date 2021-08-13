@@ -1,6 +1,4 @@
-// @ts-check
-const { defineConfig } = require('eslint-define-config')
-module.exports = defineConfig({
+module.exports = {
   root: true,
   env: {
     browser: true,
@@ -27,6 +25,6 @@ module.exports = defineConfig({
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    // '@typescript-eslint/no-explicit-any': 'off',
   },
-})
+}

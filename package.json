@@ -2,8 +2,7 @@
   "name": "vite-vue-demo",
   "version": "0.0.0",
   "license": "MIT",
-  "private":true,
-  
+  "private": true,
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
@@ -51,10 +50,10 @@
   },
   "gitHooks": {
     "commit-msg": "node ./build/scripts/verifyCommits.js",
-    "pre-commit": ""
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "{src,mock}/**/*.{vue,ts,tsx}": "eslint --fix",
-    "src/**/*.{js,json,tsx,css,less,scss,vue,html,md}": "prettier --write"
+    "*.{js,jsx,vue,ts,tsx}": "eslint --fix",
+    "*.{js,json,tsx,css,less,scss,vue,html,md}": "prettier --write"
   }
 }

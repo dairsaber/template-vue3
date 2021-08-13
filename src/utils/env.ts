@@ -17,7 +17,7 @@ export function getAppEnvConfig(): AppEnv {
     import.meta.env.DEV
       ? // Get the global configuration (the configuration will be extracted independently when packaging)
         (import.meta.env as unknown as GlobEnvConfig)
-      : (window as any)[ENV_NAME]
+      : (window as Recordable)[ENV_NAME]
   ) as GlobEnvConfig
 
   const {
