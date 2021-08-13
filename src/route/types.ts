@@ -1,58 +1,23 @@
-import type { RouteRecordRaw, RouteMeta } from 'vue-router'
-import { RoleEnum } from '@/enums/roleEnum'
+import { RouteRecordRaw, RouteMeta } from 'vue-router'
 import { defineComponent } from 'vue'
 
-export type Component<T extends any = any> =
+export type Component<T extends unknown = unknown> =
   | ReturnType<typeof defineComponent>
   | (() => Promise<typeof import('*.vue')>)
   | (() => Promise<T>)
 
-// @ts-ignore
-export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
+export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'children' | 'component'> {
   name: string
-  meta: RouteMeta
+  meta: AppRouteMeta
   component?: Component | string
   components?: Component
   children?: AppRouteRecordRaw[]
-  props?: Recordable
-  fullPath?: string
 }
 
-export interface MenuTag {
-  type?: 'primary' | 'error' | 'warn' | 'success'
-  content?: string
-  dot?: boolean
-}
-
-export interface Menu {
-  name: string
-
+export interface AppRouteMeta extends RouteMeta {
+  title: string
+  affix?: boolean
   icon?: string
-
-  path: string
-
-  // path contains param, auto assignment.
-  paramPath?: string
-
-  disabled?: boolean
-
-  children?: Menu[]
-
-  orderNo?: number
-
-  roles?: RoleEnum[]
-
-  meta?: Partial<RouteMeta>
-
-  tag?: MenuTag
-
-  hideMenu?: boolean
+  noCache?: boolean
+  breadcrumb?: boolean
 }
-
-export interface MenuModule {
-  orderNo?: number
-  menu: Menu
-}
-
-// export type AppRouteModule = RouteModule | AppRouteRecordRaw;
-export type AppRouteModule = AppRouteRecordRaw
