@@ -13,7 +13,6 @@ module.exports = {
   arrowParens: 'always',
   insertPragma: false,
   requirePragma: false,
-  proseWrap: 'never',
   htmlWhitespaceSensitivity: 'strict',
   endOfLine: 'auto',
   rangeStart: 0,

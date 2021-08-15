@@ -20,21 +20,7 @@
               type="email"
               autocomplete="email"
               required
-              class="
-                relative
-                block
-                w-full
-                px-3
-                py-2
-                text-gray-900
-                placeholder-gray-500
-                border border-gray-300
-                rounded-none
-                appearance-none
-                rounded-t-md
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10
-                sm:text-sm
-              "
+              class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none  rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
           </div>
@@ -46,21 +32,7 @@
               type="password"
               autocomplete="current-password"
               required
-              class="
-                relative
-                block
-                w-full
-                px-3
-                py-2
-                text-gray-900
-                placeholder-gray-500
-                border border-gray-300
-                rounded-none
-                appearance-none
-                rounded-b-md
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10
-                sm:text-sm
-              "
+              class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none  rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Password"
             />
           </div>
@@ -80,23 +52,7 @@
         <div>
           <button
             type="submit"
-            class="
-              relative
-              flex
-              justify-center
-              w-full
-              px-4
-              py-2
-              text-sm
-              font-medium
-              text-white
-              bg-indigo-600
-              border border-transparent
-              rounded-md
-              group
-              hover:bg-indigo-700
-              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-            "
+            class="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md  group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
               <!-- Heroicon name: solid/lock-closed -->
