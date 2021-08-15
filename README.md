@@ -25,3 +25,13 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 3. Open `src/main.ts` in VSCode
 4. Open the VSCode command palette
 5. Search and run "Select TypeScript version" -> "Use workspace version"
+
+## 注意事项
+### 安装插件
+- 安装 volar vscode插件
+- 禁用 vetur 插件
+- 项目采用antd-vue ui框架 可以使用ant-design-helper来帮助只能提示
+- 项目集成了tailwind 使用Tailwind css Intellisense 插件来帮助开发
+- 项目采用prettier格式化 必须装上prettier插件用于格式化
+### 其他注意
+- 项目中可以使用js 但是不建议 采用ts写

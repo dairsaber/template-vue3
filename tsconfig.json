@@ -16,19 +16,11 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "jest"],
-    "typeRoots": ["./node_modules/@types/", "./types/"],
+    "typeRoots": ["node_modules/@types/", "types/"],
     "paths": {
       "@/*": ["src/*"],
       "#/*": ["types/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests",
-    "types/**/*.ts",
-    "types/**/*.d.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "build/**/*.ts", "tests", "types/**/*.ts", "types/**/*.d.ts"]
 }

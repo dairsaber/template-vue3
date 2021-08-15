@@ -2,7 +2,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteComponents, { AntDesignVueResolver } from 'vite-plugin-components'
 
-import { defineConfig } from 'vite'
+import { defineConfig, UserConfigExport } from 'vite'
 import path from 'path'
 import { loadEnv } from 'vite'
 import { createProxy } from './build/vite/proxy'
@@ -13,7 +13,7 @@ function pathResolve(dir) {
 }
 
 // https://vitejs.dev/config/
-export default ({ mode }) => {
+export default ({ mode }): UserConfigExport => {
   const root = process.cwd()
   const env = loadEnv(mode, root)
   const { VITE_PORT, VITE_PROXY } = wrapperEnv(env)
@@ -40,7 +40,7 @@ export default ({ mode }) => {
       vue(),
       vueJsx(),
       viteComponents({
-        globalComponentsDeclaration: true,
+        globalComponentsDeclaration: pathResolve('./types/components.d.ts'),
         customComponentResolvers: [AntDesignVueResolver()],
       }),
     ],

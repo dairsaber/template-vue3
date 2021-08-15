@@ -15,7 +15,7 @@ const httpsRE = /^https:\/\//
  * Generate proxy
  * @param list
  */
-export function createProxy(list: ProxyList = []) {
+export function createProxy(list: ProxyList = []): ProxyTargetList {
   const ret: ProxyTargetList = {}
   for (const [prefix, target] of list) {
     const isHttps = httpsRE.test(target)
