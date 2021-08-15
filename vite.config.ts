@@ -1,5 +1,7 @@
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import viteComponents, { AntDesignVueResolver } from 'vite-plugin-components'
+
 import { defineConfig } from 'vite'
 import path from 'path'
 import { loadEnv } from 'vite'
@@ -34,6 +36,13 @@ export default ({ mode }) => {
       // Load proxy configuration from .env
       proxy: createProxy(VITE_PROXY),
     },
-    plugins: [vue(), vueJsx()],
+    plugins: [
+      vue(),
+      vueJsx(),
+      viteComponents({
+        globalComponentsDeclaration: true,
+        customComponentResolvers: [AntDesignVueResolver()],
+      }),
+    ],
   })
 }
