@@ -1,9 +1,11 @@
 // Read all environment variable configuration files to process.env
-export function wrapperEnv(envConf: Recordable): ViteEnv {
-  const ret: any = {}
+export type RealNameType = string | number | boolean
+
+export function wrapperEnv(envConf: Recordable<string | boolean>): ViteEnv {
+  const ret: Recordable<RealNameType> = {}
 
   for (const envName of Object.keys(envConf)) {
-    let realName = envConf[envName].replace(/\\n/g, '\n')
+    let realName: RealNameType = (envConf[envName] as string).replace(/\\n/g, '\n')
     realName = realName === 'true' ? true : realName === 'false' ? false : realName
 
     if (envName === 'VITE_PORT') {
@@ -11,8 +13,10 @@ export function wrapperEnv(envConf: Recordable): ViteEnv {
     }
     if (envName === 'VITE_PROXY') {
       try {
-        realName = JSON.parse(realName)
-      } catch (error) {}
+        realName = JSON.parse(realName as string)
+      } catch (error) {
+        console.log(`error`, error)
+      }
     }
     ret[envName] = realName
     if (typeof realName === 'string') {
@@ -21,5 +25,5 @@ export function wrapperEnv(envConf: Recordable): ViteEnv {
       process.env[envName] = JSON.stringify(realName)
     }
   }
-  return ret
+  return ret as unknown as ViteEnv
 }
