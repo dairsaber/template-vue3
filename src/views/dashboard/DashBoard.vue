@@ -14,5 +14,3 @@
 <template>
   <div>{{ dateStr }}</div>
 </template>
-
-<style scoped></style>
