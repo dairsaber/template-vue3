@@ -1,6 +1,7 @@
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteComponents, { AntDesignVueResolver } from 'vite-plugin-components'
+import viteSvgIcons from 'vite-plugin-svg-icons'
 
 import { defineConfig, UserConfigExport } from 'vite'
 import path from 'path'
@@ -42,6 +43,10 @@ export default ({ mode }): UserConfigExport => {
       viteComponents({
         globalComponentsDeclaration: pathResolve('./types/components.d.ts'),
         customComponentResolvers: [AntDesignVueResolver()],
+      }),
+      viteSvgIcons({
+        iconDirs: [pathResolve('src/assets/icons')],
+        symbolId: 'svg-[name]',
       }),
     ],
   })

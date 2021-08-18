@@ -2,7 +2,7 @@
   <div class="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
     <div class="w-full max-w-xs p-3 space-y-8 bg-white rounded-md shadow-lg cursor-pointer hover:shadow-xl">
       <div>
-        <img class="w-auto h-12 mx-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
+        <SvgIcon icon="all" class="mx-auto" />
         <h2 class="mt-6 text-2xl font-bold text-center text-gray-900">登录账号</h2>
       </div>
       <a-form :model="loginFormModelRef">
@@ -33,6 +33,7 @@
 
   import { computed, reactive, toRaw } from 'vue'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
+  import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
   import { debugLog } from '@/utils/log'
   import { Form } from 'ant-design-vue'
   const useForm = Form.useForm

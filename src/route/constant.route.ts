@@ -15,6 +15,12 @@ const constantRoutes: AppRouteRecordRaw[] = [
     component: () => import('@/views/dashboard/DashBoard.vue'),
     meta: { title: '控制台' },
   },
+  {
+    path: '/icons',
+    name: 'SvgIcon',
+    component: () => import('@/views/icons/SvgIcons.vue'),
+    meta: { title: 'SvgIcon' },
+  },
 ]
 
 export default constantRoutes as RouteRecordRaw[]
