@@ -27,7 +27,7 @@ export interface Result<T = unknown> {
   code: number
   type: 'success' | 'error' | 'warning'
   message: string
-  result: T
+  data: T
 }
 
 // multipart/form-data: upload file

@@ -10,7 +10,7 @@ import { useGlobSetting } from '@/hooks/setting'
 import { useMessage } from '@/hooks/web/useMessage'
 import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum'
 import { isString } from '@/utils/is'
-// import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/cookies'
 import { setObjToUrlParams, deepMerge } from '@/utils'
 // import { useErrorLogStoreWithOut } from '@/store/modules/errorLog'
 
@@ -35,23 +35,24 @@ const transform: AxiosTransform = {
     }
     // 不进行任何处理，直接返回
     // 用于页面代码可能需要直接获取code，data，message这些信息时开启
-    if (!isTransformResponse) {
+    console.log(`isTransformResponse`, isTransformResponse)
+    if (isTransformResponse === false) {
       return res.data
     }
     // 错误的时候返回
 
-    const { data } = res
-    if (!data) {
+    const { data: result } = res
+    if (!result) {
       // return '[HTTP] Request has no return value';
       throw new Error('请求出错，请稍候重试!')
     }
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message } = data
+    const { code, data, message } = result
 
     // 这里逻辑可以根据项目进行修改
-    const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS
+    const hasSuccess = result && Reflect.has(result, 'code') && code === ResultEnum.SUCCESS
     if (hasSuccess) {
-      return result
+      return data
     }
 
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
@@ -129,9 +130,8 @@ const transform: AxiosTransform = {
    */
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    // TODO 这边JWT 登录功能
-    // const token = getToken()
-    const token = ''
+    const token = getToken()
+
     if (token && (config as Recordable<any>)?.requestOptions?.withToken !== false) {
       // jwt token
       config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token

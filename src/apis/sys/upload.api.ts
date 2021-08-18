@@ -1,4 +1,4 @@
-import { UploadApiResult } from './model/uploadModel'
+import { UploadApiResult } from './model/upload.model'
 import { request } from '@/utils/http'
 import { UploadFileParams } from '#/axios'
 import { useGlobSetting } from '@/hooks/setting'

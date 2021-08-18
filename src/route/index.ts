@@ -14,4 +14,11 @@ export const setupRouter = (app: App<Element>): void => {
   app.use(router)
 }
 
+export function resetRouter() {
+  const newRouter = router
+  ;(router as any).matcher = (newRouter as any).matcher // reset router
+}
+
 export default router
+
+export const whiteList: string[] = ['Login']

@@ -7,9 +7,11 @@ import 'vite-plugin-svg-icons/register'
 import '@/styles/index.scss'
 
 import router, { setupRouter } from './route'
+import { setStore } from '@/store'
 
 debugLog(router)
 const app = createApp(App)
 setupRouter(app)
+setStore(app)
 
 app.mount('#app')
