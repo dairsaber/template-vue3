@@ -8,10 +8,12 @@ import '@/styles/index.scss'
 
 import router, { setupRouter } from './route'
 import { setStore } from '@/store'
+import { setDirective } from '@/directive'
 
 debugLog(router)
 const app = createApp(App)
 setupRouter(app)
 setStore(app)
+setDirective(app)
 
 app.mount('#app')
