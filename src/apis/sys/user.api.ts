@@ -6,7 +6,7 @@ import { Result } from '#/axios'
 enum Api {
   Login = '/login',
   Logout = '/logout',
-  GetUserInfo = '/getUserInfo',
+  GetUserInfo = '/getInfo',
   GetCaptchaImage = '/captchaImage',
 }
 
@@ -27,8 +27,8 @@ export function getUserInfo(): Promise<Result<GetUserInfoModel>> {
   return request.get<Result<GetUserInfoModel>>({ url: Api.GetUserInfo })
 }
 
-export function getCaptchaImage(): Promise<GetCaptchaImageModel> {
-  return request.get<GetCaptchaImageModel>({ url: Api.GetCaptchaImage }, { isTransformResponse: false })
+export function getCaptchaImage(): Promise<Result<GetCaptchaImageModel>> {
+  return request.get<Result<GetCaptchaImageModel>>({ url: Api.GetCaptchaImage })
 }
 
 export function doLogout(): Promise<void> {

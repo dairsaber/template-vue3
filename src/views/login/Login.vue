@@ -6,8 +6,8 @@
         <h2 class="mt-6 text-2xl font-bold text-center text-gray-900">登录账号</h2>
       </div>
       <a-form>
-        <a-form-item v-bind="validateInfos.userName">
-          <a-input v-model:value="loginFormModelRef.userName" autocomplete="username" placeholder="用户名">
+        <a-form-item v-bind="validateInfos.username">
+          <a-input v-model:value="loginFormModelRef.username" autocomplete="username" placeholder="用户名">
             <template #prefix><UserOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
           </a-input>
         </a-form-item>
@@ -47,18 +47,16 @@
   import { useRouter, useRoute, LocationQuery } from 'vue-router'
   import { Form } from 'ant-design-vue'
   import { LoginParams } from '@/apis/sys/model/user.model'
-  import { buildShortUUID } from '@/utils/uuid'
   import { getCaptchaImage } from '@/apis/sys/user.api'
   import { useUserStore } from '@/store/modules/user.store'
   import { message } from 'ant-design-vue'
 
   const useForm = Form.useForm
 
-  const loginFormModelRef = reactive<LoginParams>({ userName: '', password: '', code: '', uuid: '' })
-  loginFormModelRef.uuid = buildShortUUID()
+  const loginFormModelRef = reactive<LoginParams>({ username: '', password: '', code: '', uuid: '' })
 
   const loginFormRulesRef = reactive({
-    userName: [{ required: true, message: '请输入用户名' }],
+    username: [{ required: true, message: '请输入用户名' }],
     password: [{ required: true, message: '请输入用户密码' }],
     code: [{ required: true, message: '请输入验证码' }],
   })
@@ -69,7 +67,8 @@
 
   const getSmsCode = async () => {
     const result = await getCaptchaImage()
-    codeUrl.value = 'data:image/gif;base64,' + result?.img
+    codeUrl.value = 'data:image/gif;base64,' + result.data?.img
+    loginFormModelRef.uuid = result.data?.uuid
   }
   onMounted(() => {
     getSmsCode()
@@ -77,7 +76,7 @@
 
   // 禁止登录状态规则判断
   const loginDisabled = computed(() => {
-    return loginFormModelRef.userName.trim() === '' || loginFormModelRef.password.trim() === '' || loginFormModelRef.code.trim() === ''
+    return loginFormModelRef.username.trim() === '' || loginFormModelRef.password.trim() === '' || loginFormModelRef.code.trim() === ''
   })
 
   const { validate, validateInfos } = useForm(loginFormModelRef, loginFormRulesRef)
@@ -85,8 +84,6 @@
   const router = useRouter()
 
   const handleSubmit = async () => {
-    message.error('测试弹窗')
-
     try {
       await validate()
       const result = toRaw(loginFormModelRef) as LoginParams

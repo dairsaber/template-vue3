@@ -33,7 +33,7 @@ router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized
           // Set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
-          console.log(err)
+          console.error(err)
           // Remove token and redirect to login page
           userStore.resetToken()
           message.error(err || '发生错误')

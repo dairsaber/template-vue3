@@ -1,19 +1,29 @@
 <script lang="ts" setup>
-  import { computed, onMounted, ref } from 'vue'
+  import { useUserStore } from '@/store/modules/user.store'
+  import { computed, onMounted, onUnmounted, ref } from 'vue'
 
   const currentDate = ref<Date>(new Date())
   const dateStr = computed(() => currentDate.value.toLocaleTimeString())
-
+  let interval: number | null = null
   onMounted(() => {
-    setInterval(() => {
+    interval = window.setInterval(() => {
       currentDate.value = new Date()
     }, 1000)
   })
+  onUnmounted(() => {
+    interval && window.clearInterval(interval)
+  })
+  const userStore = useUserStore()
+  const handleLogout = () => {
+    userStore.logout()
+    window.location.href = '/login'
+  }
 </script>
 
 <template>
   <div class="display">{{ dateStr }}</div>
   <a-button type="primary">这是测试</a-button>
+  <a-button type="primary" @click="handleLogout">logout</a-button>
 </template>
 
 <style lang="scss" scoped>

@@ -1,3 +1,4 @@
+import { getToken } from '@/utils/cookies'
 import { removeToken } from '@/utils/cookies'
 import { UserModel } from '@/apis/sys/model/user.model'
 import { setToken } from '@/utils/cookies'
@@ -20,7 +21,7 @@ export type UserState = {
 export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => ({
-    token: '',
+    token: getToken(),
     name: '',
     avatar: '',
     roles: [],
@@ -33,7 +34,7 @@ export const useUserStore = defineStore({
     async login(params: LoginParams) {
       const res = await loginApi(params)
       const token = res.data.token
-      if (token) {
+      if (res.success) {
         setToken(token)
         this.token = token
         this.uuid = params.uuid

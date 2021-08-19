@@ -2,7 +2,7 @@
  * @description: Login interface parameters
  */
 export interface LoginParams {
-  userName: string
+  username: string
   password: string
   code: string
   uuid: string
@@ -12,8 +12,9 @@ export interface LoginParams {
  * @description: Login interface return value
  */
 export interface LoginResultModel {
-  userId: string | number
+  code: number
   token: string
+  msg: string
   role: string[]
 }
 

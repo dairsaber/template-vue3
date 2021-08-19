@@ -22,8 +22,8 @@ export const usePermissionStore = defineStore({
   // optional actions
   actions: {
     async setRoutes(): Promise<RemoteRoute[]> {
-      const routeList = await getRoutesList()
-      const menus = routeList.slice(0, 2)
+      const res = await getRoutesList()
+      const menus = res.data.slice(0, 2)
       if (menus) {
         const remoteRoutes = asyncJsonRoutes(menus)
         this.routes = remoteRoutes
