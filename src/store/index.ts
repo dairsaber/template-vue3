@@ -3,6 +3,6 @@ import { App } from '@vue/runtime-core'
 
 export const store: Pinia = createPinia()
 
-export const setStore = (app: App<Element>) => {
+export const setupStore = (app: App<Element>) => {
   app.use(store)
 }

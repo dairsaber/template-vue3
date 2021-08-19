@@ -1,19 +1,13 @@
-import { debugLog } from './utils/log'
+import '@/styles/index.scss'
+
 import { createApp } from 'vue'
 import App from './App.vue'
 // 加入svg图标支持
 import 'vite-plugin-svg-icons/register'
+import '@/permission'
+import { setup } from '@/setup'
 
-import '@/styles/index.scss'
-
-import router, { setupRouter } from './route'
-import { setStore } from '@/store'
-import { setDirective } from '@/directive'
-
-debugLog(router)
 const app = createApp(App)
-setupRouter(app)
-setStore(app)
-setDirective(app)
+setup(app)
 
 app.mount('#app')

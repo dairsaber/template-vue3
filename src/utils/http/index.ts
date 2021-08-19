@@ -7,8 +7,7 @@ import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { VAxios } from './Axios'
 import { checkStatus } from './checkStatus'
 import { useGlobSetting } from '@/hooks/setting'
-import { useMessage } from '@/hooks/web/useMessage'
-import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum'
+import { RequestEnum, ContentTypeEnum } from '@/enums/httpEnum'
 import { isString } from '@/utils/is'
 import { getToken } from '@/utils/cookies'
 import { setObjToUrlParams, deepMerge } from '@/utils'
@@ -18,7 +17,6 @@ import { joinTimestamp, formatRequestDate } from './helper'
 
 const globSetting = useGlobSetting()
 const urlPrefix = globSetting.urlPrefix
-const { createMessage, createErrorModal } = useMessage()
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -28,55 +26,18 @@ const transform: AxiosTransform = {
    * @description: 处理请求数据。如果数据不是预期格式，可直接抛出错误
    */
   transformRequestHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    const { isTransformResponse, isReturnNativeResponse } = options
+    const { isReturnNativeResponse } = options
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
     if (isReturnNativeResponse) {
       return res
     }
-    // 不进行任何处理，直接返回
-    // 用于页面代码可能需要直接获取code，data，message这些信息时开启
-    console.log(`isTransformResponse`, isTransformResponse)
-    if (isTransformResponse === false) {
-      return res.data
-    }
-    // 错误的时候返回
-
-    const { data: result } = res
-    if (!result) {
-      // return '[HTTP] Request has no return value';
-      throw new Error('请求出错，请稍候重试!')
-    }
-    //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, data, message } = result
-
-    // 这里逻辑可以根据项目进行修改
-    const hasSuccess = result && Reflect.has(result, 'code') && code === ResultEnum.SUCCESS
-    if (hasSuccess) {
-      return data
+    const result = res.data
+    if (result.code >= 400) {
+      checkStatus(result.code, result.msg, options.errorMessageMode)
+      throw new Error(result.msg)
     }
 
-    // 在此处根据自己项目的实际情况对不同的code执行不同的操作
-    // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
-    let timeoutMsg = ''
-    switch (code) {
-      case ResultEnum.TIMEOUT:
-        timeoutMsg = '接口请求超时,请刷新页面重试!'
-        break
-      default:
-        if (message) {
-          timeoutMsg = message
-        }
-    }
-
-    // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
-    // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
-    if (options.errorMessageMode === 'modal') {
-      createErrorModal({ title: '错误提示!', content: timeoutMsg })
-    } else if (options.errorMessageMode === 'message') {
-      createMessage.error(timeoutMsg)
-    }
-
-    throw new Error(timeoutMsg || '请求出错，请稍候重试!')
+    return result
   },
 
   // 请求之前处理config
@@ -150,36 +111,7 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (error: any) => {
-    // const errorLogStore = useErrorLogStoreWithOut()
-    // errorLogStore.addAjaxErrorInfo(error)
-    const { response, code, message, config } = error || {}
-    const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none'
-    const msg: string = response?.data?.error?.message ?? ''
-    const err: string = error?.toString?.() ?? ''
-    let errMessage = ''
-
-    try {
-      if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
-        errMessage = '接口请求超时,请刷新页面重试!'
-      }
-      if (err?.includes('Network Error')) {
-        errMessage = '网络异常，请检查您的网络连接是否正常!'
-      }
-
-      if (errMessage) {
-        if (errorMessageMode === 'modal') {
-          createErrorModal({ title: '错误提示!', content: errMessage })
-        } else if (errorMessageMode === 'message') {
-          createMessage.error(errMessage)
-        }
-        return Promise.reject(error)
-      }
-    } catch (error) {
-      throw new Error(error)
-    }
-
-    checkStatus(error?.response?.status, msg, errorMessageMode)
-    return Promise.reject(error)
+    console.error(error)
   },
 }
 

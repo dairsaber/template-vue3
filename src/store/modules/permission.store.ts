@@ -4,6 +4,7 @@ import { getRoutesList } from '@/apis/sys/menu.api'
 import { defineStore } from 'pinia'
 import Layout from '@/layout/MainLayout.vue'
 import ParentView from '@/layout/ParentView.vue'
+const componentsModules = import.meta.glob('../../views/*/*.vue')
 
 export type PermissionState = {
   routes: AppRouteRecordRaw[]
@@ -76,5 +77,5 @@ export const asyncJsonRoutes = (routes: RemoteRoute[]): RemoteRoute[] => {
 
 const loadView = (view: string) => {
   const viewReg = view.replace('index', 'Index')
-  return () => import(`@/views/${viewReg}.vue`)
+  return componentsModules[`@/views/${viewReg}.vue`]
 }

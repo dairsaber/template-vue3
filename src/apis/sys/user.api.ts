@@ -1,7 +1,7 @@
 import { request } from '@/utils/http'
 import { LoginParams, LoginResultModel, GetUserInfoModel, GetCaptchaImageModel } from './model/user.model'
 
-import { ErrorMessageMode, Result } from '#/axios'
+import { Result } from '#/axios'
 
 enum Api {
   Login = '/login',
@@ -13,16 +13,11 @@ enum Api {
 /**
  * @description: user login api
  */
-export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal'): Promise<Result<LoginResultModel>> {
-  return request.post<Result<LoginResultModel>>(
-    {
-      url: Api.Login,
-      params,
-    },
-    {
-      errorMessageMode: mode,
-    }
-  )
+export function loginApi(params: LoginParams): Promise<Result<LoginResultModel>> {
+  return request.post<Result<LoginResultModel>>({
+    url: Api.Login,
+    params,
+  })
 }
 
 /**
