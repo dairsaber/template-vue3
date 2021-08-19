@@ -1356,10 +1356,10 @@
   resolved "https://registry.nlark.com/@types/node/download/@types/node-16.4.13.tgz?cache=0&sync_timestamp=1628211786489&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-16.4.13.tgz#7dfd9c14661edc65cccd43a29eb454174642370d"
   integrity sha1-ff2cFGYe3GXMzUOinrRUF0ZCNw0=
 
-"@types/node@^16.6.1":
-  version "16.6.1"
-  resolved "https://registry.nlark.com/@types/node/download/@types/node-16.6.1.tgz#aee62c7b966f55fc66c7b6dfa1d58db2a616da61"
-  integrity sha1-ruYse5ZvVfxmx7bfodWNsqYW2mE=
+"@types/node@^16.6.2":
+  version "16.6.2"
+  resolved "https://registry.nlark.com/@types/node/download/@types/node-16.6.2.tgz#331b7b9f8621c638284787c5559423822fdffc50"
+  integrity sha1-Mxt7n4YhxjgoR4fFVZQjgi/f/FA=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -3909,10 +3909,10 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild@^0.12.8:
-  version "0.12.19"
-  resolved "https://registry.nlark.com/esbuild/download/esbuild-0.12.19.tgz?cache=0&sync_timestamp=1628371854065&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.12.19.tgz#ab849766705a5093df5acd8ec2f6ba2159a38a6c"
-  integrity sha1-q4SXZnBaUJPfWs2Owva6IVmjimw=
+esbuild@^0.12.17:
+  version "0.12.21"
+  resolved "https://registry.nlark.com/esbuild/download/esbuild-0.12.21.tgz#7ff32a9ac73ce4310f9cb61ea4c3da9756570d46"
+  integrity sha1-f/Mqmsc85DEPnLYepMPal1ZXDUY=
 
 escalade@^3.1.1:
   version "3.1.1"
@@ -7972,10 +7972,10 @@ sass-loader@^12.1.0:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.37.5:
-  version "1.37.5"
-  resolved "https://registry.nlark.com/sass/download/sass-1.37.5.tgz#f6838351f7cc814c4fcfe1d9a20e0cabbd1e7b3c"
-  integrity sha1-9oODUffMgUxPz+HZog4Mq70eezw=
+sass@^1.38.0:
+  version "1.38.0"
+  resolved "https://registry.nlark.com/sass/download/sass-1.38.0.tgz#2f3e60a1efdcdc910586fa79dc89d3399a145b4f"
+  integrity sha1-Lz5goe/c3JEFhvp53InTOZoUW08=
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 
@@ -9109,12 +9109,12 @@ vite-plugin-svg-icons@^1.0.4:
     svg-baker "1.7.0"
     svgo "^2.3.1"
 
-vite@^2.4.4:
-  version "2.4.4"
-  resolved "https://registry.nlark.com/vite/download/vite-2.4.4.tgz?cache=0&sync_timestamp=1628530655989&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvite%2Fdownload%2Fvite-2.4.4.tgz#8c402a07ad45f168f6eb5428bead38f3e4363e47"
-  integrity sha1-jEAqB61F8Wj261Qovq048+Q2Pkc=
+vite@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.nlark.com/vite/download/vite-2.5.0.tgz#111ba3679432d426e44566acf480005a7914cbd6"
+  integrity sha1-ERujZ5Qy1CbkRWas9IAAWnkUy9Y=
   dependencies:
-    esbuild "^0.12.8"
+    esbuild "^0.12.17"
     postcss "^8.3.6"
     resolve "^1.20.0"
     rollup "^2.38.5"
