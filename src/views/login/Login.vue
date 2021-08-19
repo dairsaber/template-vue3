@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
-    <div class="w-full max-w-xs p-3 space-y-8 bg-white rounded-md shadow-lg cursor-pointer hover:shadow-xl">
+    <div class="w-full max-w-sm p-3 px-8 space-y-8 bg-white rounded-md shadow-lg cursor-pointer hover:shadow-xl">
       <div>
         <SvgIcon icon="all" class="mx-auto" />
         <h2 class="mt-6 text-2xl font-bold text-center text-gray-900">登录账号</h2>
