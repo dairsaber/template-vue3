@@ -4,12 +4,12 @@
   </svg>
 </template>
 <script setup lang="ts">
-  import { computed, PropType } from 'vue'
+  import { computed } from 'vue'
   const props = defineProps({
-    icon: { type: String as PropType<string>, require: true },
+    icon: { type: String, require: true },
     // svg自定义类名
-    className: { type: String as PropType<string> },
-    color: { type: String as PropType<string>, default: '#889aa4' },
+    className: String,
+    color: { type: String, default: '#889aa4' },
   })
 
   const iconName = computed(() => `#svg-${props.icon}`)

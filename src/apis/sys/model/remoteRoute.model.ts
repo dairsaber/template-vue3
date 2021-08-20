@@ -7,6 +7,6 @@ export interface RemoteRoute extends AppRouteRecordRaw {
   component: string | Component
   name: string
   num: number
-  hidden: boolean
-  children: RemoteRoute[]
+  hidden?: boolean
+  children?: RemoteRoute[]
 }

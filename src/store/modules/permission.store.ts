@@ -4,6 +4,7 @@ import { getRoutesList } from '@/apis/sys/menu.api'
 import { defineStore } from 'pinia'
 import Layout from '@/layout/MainLayout.vue'
 import ParentView from '@/layout/ParentView.vue'
+import constantRoutes from '@/route/constant.route'
 const componentsModules = import.meta.glob('../../views/*/*.vue')
 
 export type PermissionState = {
@@ -26,7 +27,7 @@ export const usePermissionStore = defineStore({
       const menus = res.data.slice(0, 2)
       if (menus) {
         const remoteRoutes = asyncJsonRoutes(menus)
-        this.routes = remoteRoutes
+        this.routes = remoteRoutes.concat(constantRoutes as RemoteRoute[])
         return remoteRoutes
       }
       return []

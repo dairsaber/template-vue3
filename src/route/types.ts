@@ -5,8 +5,9 @@ export type Component<T extends unknown = unknown> = ReturnType<typeof defineCom
 
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'children' | 'component'> {
   name: string
-  meta: AppRouteMeta
+  meta?: AppRouteMeta
   roles?: string[]
+  hidden?: boolean
   component?: Component | string
   components?: Component
   children?: AppRouteRecordRaw[]
