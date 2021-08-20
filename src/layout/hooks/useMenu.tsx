@@ -6,6 +6,7 @@ import type { MenuProps } from '../components/SiderBarMenu.vue'
 import { SubMenu, MenuItem } from 'ant-design-vue'
 import { BarsOutlined } from '@ant-design/icons-vue'
 import { usePermissionStore } from '@/store/modules/permission.store'
+import { Icons } from '@/setup/antd'
 
 type MenuConfig = {
   components: Component[]
@@ -63,7 +64,7 @@ export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
 
     const { components, routeMap: rm } = generateMenu(children!, currentPath)
     const iconComponent = getIconComponent(icon)
-    const slots: Recordable<Component> = { icon: () => iconComponent }
+    const slots: Recordable<() => Component | null> = { icon: () => iconComponent }
     const component = (
       <SubMenu key={currentPath} title={title} v-slots={slots}>
         {components}
@@ -80,7 +81,7 @@ export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
 
     const { title = '未设置', icon } = meta ?? {}
     const iconComponent = getIconComponent(icon)
-    const slots: Recordable<Component> = { icon: () => iconComponent }
+    const slots: Recordable<() => Component | null> = { icon: () => iconComponent }
 
     const component = (
       <MenuItem key={currentPath} v-slots={slots}>
@@ -91,7 +92,7 @@ export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
     return { component, routeMap: { [currentPath]: menu } }
   }
 
-  const getIconComponent = (icon?: string): Component => {
+  const getIconComponent = (icon?: string): Component | null => {
     let iconComponent: Component = h(BarsOutlined)
     // 处理图标
     if (icon) {
@@ -100,7 +101,7 @@ export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
         const iconName = icon.substring(3)
         iconComponent = <SvgIcon icon={iconName} color={props.theme === 'dark' ? '#fff' : '#000'} />
       } else if (antIconNames.includes(icon)) {
-        iconComponent = h(icon)
+        iconComponent = h(Icons[icon])
       }
     }
 

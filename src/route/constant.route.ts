@@ -21,7 +21,7 @@ const constantRoutes: AppRouteRecordRaw[] = [
         path: 'home',
         name: 'Home',
         component: () => import('@/views/dashboard/DashBoard.vue'),
-        meta: { title: '控制台' },
+        meta: { title: '控制台', icon: 'DashboardOutlined' },
       },
       {
         path: 'test',

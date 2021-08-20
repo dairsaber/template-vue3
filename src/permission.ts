@@ -24,9 +24,7 @@ router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized
           await userStore.getUserInfo()
           const accessRoutes = await permissionStore.setRoutes()
 
-          console.log(accessRoutes)
           accessRoutes.forEach((route) => {
-            console.log(route, '==================================')
             router.addRoute(route)
           })
           // Hack: ensure addRoutes is complete

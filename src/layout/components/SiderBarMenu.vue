@@ -17,12 +17,10 @@
       // 当前激活key
       const route = useRoute()
       const currentKey = computed(() => [route.path])
-
       const router = useRouter()
 
       // TODO 这边外链配置还没有设置
       const handleSelect: MenuSelectHanlder = ({ key }) => {
-        console.log(`item,key`, key)
         router.push(key)
       }
       return () => (
