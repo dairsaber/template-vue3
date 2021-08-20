@@ -1,9 +1,11 @@
 import { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
 import { antIconNames } from '@/setup/antd'
-import { Component, h } from 'vue'
+import { Component, h, computed, ref, watch, Ref } from 'vue'
 import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
 import type { MenuProps } from '../components/SiderBarMenu.vue'
 import { SubMenu, MenuItem } from 'ant-design-vue'
+import { BarsOutlined } from '@ant-design/icons-vue'
+import { usePermissionStore } from '@/store/modules/permission.store'
 
 type MenuConfig = {
   components: Component[]
@@ -14,7 +16,22 @@ type SubMenuConfig = {
   routeMap: Recordable<RemoteRoute>
 }
 
-export const useMenu = (menus: RemoteRoute[], props: MenuProps) => {
+export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
+  const menuStore = usePermissionStore()
+
+  // 将静态路由/下的menu展平在menu中
+  const menus = computed((): RemoteRoute[] => {
+    let routes = [...(menuStore.routes as RemoteRoute[])]
+    const mainRoute = routes.find((route) => route.path === '')
+    if (mainRoute) {
+      const index = routes.indexOf(mainRoute)
+      routes.splice(index, 1)
+      routes = [...(mainRoute.children ?? []), ...routes]
+    }
+    return routes
+  })
+
+  const menuConfig = ref<MenuConfig>({ components: [], routeMap: {} })
   // 导出routeMap的原因是 在外面当做字典
   const generateMenu = (menus: RemoteRoute[], basePath = ''): MenuConfig => {
     const menuComponents: Component[] = []
@@ -46,7 +63,7 @@ export const useMenu = (menus: RemoteRoute[], props: MenuProps) => {
 
     const { components, routeMap: rm } = generateMenu(children!, currentPath)
     const iconComponent = getIconComponent(icon)
-    const slots: Recordable<Component | null> = { icon: iconComponent }
+    const slots: Recordable<Component> = { icon: () => iconComponent }
     const component = (
       <SubMenu key={currentPath} title={title} v-slots={slots}>
         {components}
@@ -63,7 +80,7 @@ export const useMenu = (menus: RemoteRoute[], props: MenuProps) => {
 
     const { title = '未设置', icon } = meta ?? {}
     const iconComponent = getIconComponent(icon)
-    const slots: Recordable<Component | null> = { icon: iconComponent }
+    const slots: Recordable<Component> = { icon: () => iconComponent }
 
     const component = (
       <MenuItem key={currentPath} v-slots={slots}>
@@ -74,8 +91,8 @@ export const useMenu = (menus: RemoteRoute[], props: MenuProps) => {
     return { component, routeMap: { [currentPath]: menu } }
   }
 
-  const getIconComponent = (icon?: string): Component | null => {
-    let iconComponent: Component | null = null
+  const getIconComponent = (icon?: string): Component => {
+    let iconComponent: Component = h(BarsOutlined)
     // 处理图标
     if (icon) {
       const isSvg = icon.startsWith('svg-')
@@ -90,5 +107,13 @@ export const useMenu = (menus: RemoteRoute[], props: MenuProps) => {
     return iconComponent
   }
 
-  return generateMenu(menus)
+  watch(
+    () => menuStore.routes,
+    () => {
+      menuConfig.value = generateMenu(menus.value)
+    },
+    { immediate: true }
+  )
+
+  return menuConfig
 }

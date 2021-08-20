@@ -1,7 +1,6 @@
 <script lang="tsx">
   import { debugLog } from '@/utils/log'
   import type { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
-  import { usePermissionStore } from '@/store/modules/permission.store'
   import { computed, defineComponent } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { useMenu } from '../hooks/useMenu'
@@ -12,21 +11,9 @@
   type MenuSelectHanlder = ({ item, key }: { item: RemoteRoute; key: string }) => void
   export default defineComponent({
     setup(props: MenuProps) {
-      const menuStore = usePermissionStore()
-      const getMenu = (): RemoteRoute[] => {
-        let routes = menuStore.routes as RemoteRoute[]
-        const mainRoute = routes.find((route) => route.path === '')
-        if (mainRoute) {
-          const index = routes.indexOf(mainRoute)
-          routes.splice(index, 1)
-          routes = routes.concat(mainRoute.children || [])
-        }
-        return routes
-      }
-      const menus = getMenu()
-      console.log(`menus`, menus)
-      const { components, routeMap } = useMenu(menus, props)
-      debugLog('routeMap', routeMap)
+      const menuConfig = useMenu(props)
+
+      debugLog('routeMap', menuConfig.value.routeMap)
       // 当前激活key
       const route = useRoute()
       const currentKey = computed(() => [route.path])
@@ -40,7 +27,7 @@
       }
       return () => (
         <a-menu onSelect={handleSelect} selectedKeys={currentKey.value} theme={props.theme} mode="inline">
-          {components}
+          {menuConfig.value.components}
         </a-menu>
       )
     },

@@ -64,7 +64,7 @@ export function checkStatus(status: number, msg: string, errorMessageMode: Error
     if (errorMessageMode === 'none') {
       console.error(errMessage)
     } else {
-      message.error(errMessage)
+      errMessage && message.error(errMessage)
     }
   }
 }

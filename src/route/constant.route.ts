@@ -16,11 +16,18 @@ const constantRoutes: AppRouteRecordRaw[] = [
     component: () => import('@/layout/MainLayout.vue'),
     redirect: '/home',
     children: [
+      //配置在这个children下的路由将会展示在左边menu的第一层 平铺 没有嵌套
       {
         path: 'home',
         name: 'Home',
         component: () => import('@/views/dashboard/DashBoard.vue'),
         meta: { title: '控制台' },
+      },
+      {
+        path: 'test',
+        name: 'Test',
+        component: () => import('@/views/dashboard/DashBoard.vue'),
+        meta: { title: '控制台2' },
       },
     ],
   },
