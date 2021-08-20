@@ -1,5 +1,4 @@
 <script lang="tsx">
-  import { debugLog } from '@/utils/log'
   import type { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
   import { computed, defineComponent } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
@@ -13,7 +12,6 @@
     setup(props: MenuProps) {
       const menuConfig = useMenu(props)
 
-      debugLog('routeMap', menuConfig.value.routeMap)
       // 当前激活key
       const route = useRoute()
       const currentKey = computed(() => [route.path])
