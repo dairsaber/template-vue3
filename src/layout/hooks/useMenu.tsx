@@ -7,6 +7,7 @@ import { SubMenu, MenuItem } from 'ant-design-vue'
 import { BarsOutlined } from '@ant-design/icons-vue'
 import { usePermissionStore } from '@/store/modules/permission.store'
 import { Icons } from '@/setup/antd'
+import { isUrl } from '@/utils/is'
 
 type MenuConfig = {
   components: Component[]
@@ -76,12 +77,19 @@ export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
 
   const generateMenuItem = (menu: RemoteRoute, basePath: string): SubMenuConfig => {
     const { meta } = menu
-    const path = menu.path.replace('/', '')
-    const currentPath = `${basePath}/${path}`
-
     const { title = '未设置', icon } = meta ?? {}
     const iconComponent = getIconComponent(icon)
     const slots: Recordable<() => Component | null> = { icon: () => iconComponent }
+
+    let currentPath: string
+    let path = menu.path
+    // 对url地址进行特殊处理
+    if (isUrl(path)) {
+      currentPath = path
+    } else {
+      path = path.replace('/', '')
+      currentPath = `${basePath}/${path}`
+    }
 
     const component = (
       <MenuItem key={currentPath} v-slots={slots}>

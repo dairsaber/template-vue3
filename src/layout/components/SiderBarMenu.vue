@@ -1,5 +1,6 @@
 <script lang="tsx">
   import type { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
+  import { isUrl } from '@/utils/is'
   import { computed, defineComponent } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { useMenu } from '../hooks/useMenu'
@@ -19,7 +20,12 @@
 
       // TODO 这边外链配置还没有设置
       const handleSelect: MenuSelectHanlder = ({ key }) => {
-        router.push(key)
+        const isLink = isUrl(key)
+        if (isLink) {
+          window.open(key, 'target')
+        } else {
+          router.push(key)
+        }
       }
       return () => (
         <a-menu onSelect={handleSelect} selectedKeys={currentKey.value} theme={props.theme} mode="inline">

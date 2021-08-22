@@ -6,6 +6,7 @@ import router, { whiteList } from '@/route'
 import { RouteLocationNormalized } from 'vue-router'
 import { usePermissionStore } from '@/store/modules/permission.store'
 import { useUserStore } from '@/store/modules/user.store'
+import { isUrl } from '@/utils/is'
 NProgress.configure({ showSpinner: false })
 
 router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized, next: any) => {
@@ -25,6 +26,8 @@ router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized
           const accessRoutes = await permissionStore.setRoutes()
 
           accessRoutes.forEach((route) => {
+            // 这边过滤掉url的路由
+            if (isUrl(route.path)) return false
             router.addRoute(route)
           })
           // Hack: ensure addRoutes is complete
