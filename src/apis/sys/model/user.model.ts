@@ -26,7 +26,7 @@ export type UserModel = {
   // 头像
   avatar?: string
   // 介绍
-  permissions: string[]
+  permissions?: string[]
   // 后面在补充
 }
 /**

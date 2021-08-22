@@ -4,11 +4,10 @@
   import { computed, defineComponent } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { useMenu } from '../hooks/useMenu'
+  import { MenuProps } from '@/@types/layout/siderbarMenu'
 
-  export type MenuProps = {
-    theme: 'dark' | 'light'
-  }
   type MenuSelectHanlder = ({ item, key }: { item: RemoteRoute; key: string }) => void
+
   export default defineComponent({
     setup(props: MenuProps) {
       const menuConfig = useMenu(props)
@@ -28,7 +27,12 @@
         }
       }
       return () => (
-        <a-menu onSelect={handleSelect} selectedKeys={currentKey.value} theme={props.theme} mode="inline">
+        <a-menu
+          onSelect={handleSelect}
+          selectedKeys={currentKey.value}
+          theme={props.theme}
+          mode="inline"
+        >
           {menuConfig.value.components}
         </a-menu>
       )
