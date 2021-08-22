@@ -27,7 +27,7 @@ const constantRoutes: AppRouteRecordRaw[] = [
         path: '/icons',
         name: 'SvgIcon',
         component: () => import('@/views/icons/SvgIcons.vue'),
-        meta: { title: 'SvgIcon' },
+        meta: { title: 'SvgIcon', icon: 'svg-all' },
       },
     ],
   },

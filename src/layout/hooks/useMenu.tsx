@@ -106,8 +106,8 @@ export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
     if (icon) {
       const isSvg = icon.startsWith('svg-')
       if (isSvg) {
-        const iconName = icon.substring(3)
-        iconComponent = <SvgIcon icon={iconName} color={props.theme === 'dark' ? '#fff' : '#000'} />
+        const iconName = icon.substring(4)
+        iconComponent = <SvgIcon icon={iconName} />
       } else if (antIconNames.includes(icon)) {
         iconComponent = h(Icons[icon])
       }

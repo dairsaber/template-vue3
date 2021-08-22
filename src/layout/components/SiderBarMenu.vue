@@ -18,7 +18,7 @@
       const currentKey = computed(() => [route.path])
       const router = useRouter()
 
-      // TODO 这边外链配置还没有设置
+      // 当菜单选择跳转逻辑
       const handleSelect: MenuSelectHanlder = ({ key }) => {
         const isLink = isUrl(key)
         if (isLink) {
