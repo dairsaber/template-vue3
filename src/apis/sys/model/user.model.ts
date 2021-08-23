@@ -25,7 +25,13 @@ export type UserModel = {
   userName: string
   // 头像
   avatar?: string
-  // 介绍
+  // 昵称
+  nickName: string
+
+  phonenumber: string
+
+  email: string
+
   permissions?: string[]
   // 后面在补充
 }

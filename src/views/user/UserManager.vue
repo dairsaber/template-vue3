@@ -1,28 +1,14 @@
-<template>
-  <div>
-    <a-space :size="8">
-      <a-input placeholder="请输入昵称搜索" v-model:value="params.searchValue" />
-      <a-button @click="handleSearch">
-        <template #icon>
-          <SearchOutlined />
-        </template>
-        搜索
-      </a-button>
-    </a-space>
-    <base-list class="mt-4" :params="params" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" @change="handleListChange" />
-  </div>
-</template>
-
-<script lang="ts" setup>
+<script lang="tsx" setup>
   import BaseList from '@/components/BaseList/BaseList.vue'
-  import { ColumnProps, TableState, TableStateFilters } from 'ant-design-vue/es/table/interface'
+  import { TableState, TableStateFilters } from 'ant-design-vue/es/table/interface'
   import { getUsers } from '@/apis/sys/users.api'
-  import { ref } from 'vue'
+  import { ref, VNode } from 'vue'
   import type { UserModel } from '@/apis/sys/model/user.model'
+  import { defineColumns } from '@/utils/component/table.utils'
 
   type Pagination = TableState['pagination']
 
-  const columns: ColumnProps[] = [
+  const columns = defineColumns<UserModel>([
     {
       dataIndex: 'nickName',
       title: '昵称',
@@ -37,8 +23,11 @@
       dataIndex: 'email',
       title: '邮箱',
       key: 'email',
+      customRender: ({ record }) => {
+        return <a-tag>{record.email}</a-tag>
+      },
     },
-  ]
+  ])
   const params = ref({ searchValue: '' })
 
   const listRef = ref()
@@ -53,4 +42,17 @@
   }
 </script>
 
-<style lang="scss" scoped></style>
+<template>
+  <div>
+    <a-space :size="8">
+      <a-input placeholder="请输入昵称搜索" v-model:value="params.searchValue" />
+      <a-button @click="handleSearch">
+        <template #icon>
+          <SearchOutlined />
+        </template>
+        搜索
+      </a-button>
+    </a-space>
+    <base-list class="mt-4" :params="params" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" @change="handleListChange" />
+  </div>
+</template>
