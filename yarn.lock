@@ -1932,9 +1932,9 @@
   resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.2.4.tgz#ba2a09527afff27b28d08f921b4a597e9504ca7a"
   integrity sha1-uioJUnr/8nso0I+SG0pZfpUEyno=
 
-"@vue/test-utils@^2.0.0-0":
+"@vue/test-utils@^2.0.0-rc.12":
   version "2.0.0-rc.12"
-  resolved "https://registry.nlark.com/@vue/test-utils/download/@vue/test-utils-2.0.0-rc.12.tgz?cache=0&sync_timestamp=1627459764095&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Ftest-utils%2Fdownload%2F%40vue%2Ftest-utils-2.0.0-rc.12.tgz#716a84d915d6045640eeac416cc2a2acd514e06e"
+  resolved "https://registry.nlark.com/@vue/test-utils/download/@vue/test-utils-2.0.0-rc.12.tgz#716a84d915d6045640eeac416cc2a2acd514e06e"
   integrity sha1-cWqE2RXWBFZA7qxBbMKirNUU4G4=
 
 "@webassemblyjs/ast@1.9.0":
@@ -7064,13 +7064,13 @@ pify@^4.0.1:
   resolved "https://registry.npm.taobao.org/pify/download/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha1-SyzSXFDVmHNcUCkiJP2MbfQeMjE=
 
-pinia@^2.0.0-rc.4:
-  version "2.0.0-rc.4"
-  resolved "https://registry.nlark.com/pinia/download/pinia-2.0.0-rc.4.tgz#43fca89aeb8d397ca9900f001c2125c4d6765dd6"
-  integrity sha1-Q/yomuuNOXypkA8AHCElxNZ2XdY=
+pinia@^2.0.0-rc.6:
+  version "2.0.0-rc.6"
+  resolved "https://registry.nlark.com/pinia/download/pinia-2.0.0-rc.6.tgz?cache=0&sync_timestamp=1629394922521&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fpinia%2Fdownload%2Fpinia-2.0.0-rc.6.tgz#f83b7f2a62710715487574d6f442aa879961122b"
+  integrity sha1-+Dt/KmJxBxVIdXTW9EKqh5lhEis=
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.15"
-    vue-demi latest
+    vue-demi "*"
 
 pirates@^4.0.1:
   version "4.0.1"
@@ -9281,9 +9281,9 @@ vscode-vue-languageservice@^0.27.0:
     vscode-pug-languageservice "^0.27.3"
     vscode-typescript-languageservice "^0.27.3"
 
-vue-demi@latest:
+vue-demi@*:
   version "0.11.3"
-  resolved "https://registry.nlark.com/vue-demi/download/vue-demi-0.11.3.tgz#dd7495b92b495ecfa35675bf024b1358a7add150"
+  resolved "https://registry.nlark.com/vue-demi/download/vue-demi-0.11.3.tgz?cache=0&sync_timestamp=1628928156379&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-demi%2Fdownload%2Fvue-demi-0.11.3.tgz#dd7495b92b495ecfa35675bf024b1358a7add150"
   integrity sha1-3XSVuStJXs+jVnW/AksTWKet0VA=
 
 vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.10.0:
