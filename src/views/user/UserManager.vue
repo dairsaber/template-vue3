@@ -2,7 +2,7 @@
   import BaseList from '@/components/BaseList/BaseList.vue'
   import { TableState, TableStateFilters } from 'ant-design-vue/es/table/interface'
   import { getUsers } from '@/apis/sys/users.api'
-  import { ref, VNode } from 'vue'
+  import { ref } from 'vue'
   import type { UserModel } from '@/apis/sys/model/user.model'
   import { defineColumns } from '@/utils/component/table.utils'
 
