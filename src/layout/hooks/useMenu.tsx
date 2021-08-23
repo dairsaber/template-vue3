@@ -2,7 +2,7 @@ import { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
 import { antIconNames } from '@/setup/antd'
 import { Component, h, computed, ref, watch, Ref } from 'vue'
 import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
-import type { MenuProps } from '@/@types/layout/siderbarMenu'
+// import type { MenuProps } from '@/@types/layout/siderbarMenu'
 import { SubMenu, MenuItem } from 'ant-design-vue'
 import { BarsOutlined } from '@ant-design/icons-vue'
 import { usePermissionStore } from '@/store/modules/permission.store'
@@ -18,7 +18,7 @@ type SubMenuConfig = {
   routeMap: Recordable<RemoteRoute>
 }
 
-export const useMenu = (props: MenuProps): Ref<MenuConfig> => {
+export const useMenu = (): Ref<MenuConfig> => {
   const menuStore = usePermissionStore()
 
   // 将静态路由/下的menu展平在menu中

@@ -1,6 +1,5 @@
 import type { GlobEnvConfig } from '#/config'
 import { warn } from '@/utils/log'
-import { getConfigFileName } from '../../build/getConfigFileName'
 
 export interface AppEnv {
   VITE_GLOB_APP_TITLE: string

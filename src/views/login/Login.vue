@@ -49,7 +49,6 @@
   import { LoginParams } from '@/apis/sys/model/user.model'
   import { getCaptchaImage } from '@/apis/sys/user.api'
   import { useUserStore } from '@/store/modules/user.store'
-  import { message } from 'ant-design-vue'
 
   const useForm = Form.useForm
 

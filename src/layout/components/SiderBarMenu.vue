@@ -10,7 +10,7 @@
 
   export default defineComponent({
     setup(props: MenuProps) {
-      const menuConfig = useMenu(props)
+      const menuConfig = useMenu()
 
       // 当前激活key
       const route = useRoute()
@@ -27,12 +27,7 @@
         }
       }
       return () => (
-        <a-menu
-          onSelect={handleSelect}
-          selectedKeys={currentKey.value}
-          theme={props.theme}
-          mode="inline"
-        >
+        <a-menu onSelect={handleSelect} selectedKeys={currentKey.value} theme={props.theme} mode="inline">
           {menuConfig.value.components}
         </a-menu>
       )
