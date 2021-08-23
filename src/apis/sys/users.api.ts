@@ -1,5 +1,5 @@
 import { QueryParams } from './../../@types/request'
-import { PaginationList } from '../model'
+import { PaginationList } from '../../@types/model/model'
 import { UserModel } from './model/user.model'
 import { request } from '@/utils/http'
 import { Result } from '#/axios'

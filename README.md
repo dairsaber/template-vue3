@@ -33,5 +33,23 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 - 项目采用antd-vue ui框架 可以使用ant-design-helper来帮助只能提示
 - 项目集成了tailwind 使用Tailwind css Intellisense 插件来帮助开发
 - 项目采用prettier格式化 必须装上prettier插件用于格式化
+
 ### 其他注意
+
 - 项目中可以使用js 但是不建议 采用ts写
+
+## 规范
+
+### 命名规范
+
+- 文件夹名称采用-命名方式 `error-page`
+- 组件名称 首字母大写 大坨峰命名规则 `SvgIcon.vue`
+- 公共类型声明以 `.d.ts` 声明
+- hook 文件名 以use开头 小驼峰 `usePagination.ts`
+- api文件 以 .apt.ts 结尾 `user.api.ts`
+- model 模型文件以 .model.ts 结尾 `user.model.ts`
+- 状态文件 store 以.store.ts 结尾 `user.store.ts`
+- 服务类文件 services 以 .services.ts 结尾 `user.services.ts`
+- 配置类文件 settings 或者setting 以.conf.ts结尾 `pagination.conf.ts`
+- 枚举文件以 .enum.ts 结尾 `app.enum.ts`
+- 路由文件 以.route.ts结尾 `constaint.route.ts`

@@ -1,11 +1,11 @@
 import { QueryParams } from '@/@types/request'
 import { Result } from '#/axios'
-import { PaginationList } from '@/apis/model'
+import { PaginationList } from '@/@types/model/model'
 import { TableState } from 'ant-design-vue/lib/table/interface'
 
 import { computed, reactive, toRaw } from 'vue'
-import * as config from '@/settings/pagination.config'
-import { useRequest } from '../request/useRequest.hook'
+import * as config from '@/settings/pagination.conf'
+import { useRequest } from '../request/useRequest'
 
 export type QueryAction = (params: QueryParams) => Promise<Result>
 
@@ -30,14 +30,9 @@ export const usePagination = (props: ListProps) => {
     }
   })
 
-  const { search, loading, result } = useRequest<PaginationList>(
-    props.action,
-    toRaw(searchQuery.value),
-    { rows: [], total: 0 },
-    (result: Result) => {
-      return result.data as PaginationList
-    }
-  )
+  const { search, loading, result } = useRequest<PaginationList>(props.action, toRaw(searchQuery.value), { rows: [], total: 0 }, (result: Result) => {
+    return result.data as PaginationList
+  })
 
   // 分页事件
   const handlePaginationChange = (page: number, pageSize: number) => {

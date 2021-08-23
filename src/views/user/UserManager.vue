@@ -1,3 +1,18 @@
+<template>
+  <div>
+    <a-space :size="8">
+      <a-input placeholder="请输入昵称搜索" v-model:value="params.searchValue" />
+      <a-button @click="handleSearch">
+        <template #icon>
+          <SearchOutlined />
+        </template>
+        搜索
+      </a-button>
+    </a-space>
+    <base-list class="mt-4" :params="params" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" @change="handleListChange" />
+  </div>
+</template>
+
 <script lang="ts" setup>
   import BaseList from '@/components/BaseList/BaseList.vue'
   import { ColumnProps, TableState, TableStateFilters } from 'ant-design-vue/es/table/interface'
@@ -37,28 +52,5 @@
     listRef.value.search()
   }
 </script>
-
-<template>
-  <div>
-    <a-space :size="8">
-      <a-input placeholder="请输入昵称搜索" v-model:value="params.searchValue" />
-      <a-button @click="handleSearch">
-        <template #icon>
-          <SearchOutlined />
-        </template>
-        搜索
-      </a-button>
-    </a-space>
-    <base-list
-      class="mt-4"
-      :params="params"
-      :columns="columns"
-      :action="getUsers"
-      ref="listRef"
-      :row-key="rowKey"
-      @change="handleListChange"
-    />
-  </div>
-</template>
 
 <style lang="scss" scoped></style>

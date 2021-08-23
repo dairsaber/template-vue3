@@ -1,3 +1,4 @@
+import { isDevMode } from '@/utils/env'
 const projectName = import.meta.env.VITE_GLOB_APP_TITLE
 
 export function warn(message: string): void {
@@ -13,7 +14,7 @@ export function error(message: string): void {
  * @param params 要打印到控制台的变量什么的
  */
 export function debugLog(...params: unknown[]): void {
-  if (import.meta.env.DEV) {
+  if (isDevMode()) {
     console.log(...params)
   }
 }

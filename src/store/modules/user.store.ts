@@ -53,7 +53,7 @@ export const useUserStore = defineStore({
       this.roles = roles
       this.user = user
       this.name = user.userName
-      this.permissions = user.permissions
+      this.permissions = user.permissions ?? []
       this.avatar = user.avatar
     },
     resetToken() {

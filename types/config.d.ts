@@ -1,4 +1,4 @@
-import { SessionTimeoutProcessingEnum } from '@/enums/appEnum'
+import { SessionTimeoutProcessingEnum } from '@/enums/app.enum'
 export interface GlobEnvConfig {
   // Site title
   VITE_GLOB_APP_TITLE: string

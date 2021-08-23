@@ -11,14 +11,7 @@ export interface AppEnv {
 }
 
 export function getAppEnvConfig(): AppEnv {
-  const ENV_NAME = getConfigFileName(import.meta.env)
-
-  const ENV = (
-    import.meta.env.DEV
-      ? // Get the global configuration (the configuration will be extracted independently when packaging)
-        (import.meta.env as unknown as GlobEnvConfig)
-      : (window as unknown as Recordable)[ENV_NAME]
-  ) as GlobEnvConfig
+  const ENV = import.meta.env as unknown as GlobEnvConfig as GlobEnvConfig
 
   const { VITE_GLOB_APP_TITLE, VITE_GLOB_API_URL, VITE_GLOB_APP_SHORT_NAME, VITE_GLOB_API_URL_PREFIX, VITE_GLOB_UPLOAD_URL } = ENV
 

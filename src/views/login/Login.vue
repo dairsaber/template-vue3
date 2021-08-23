@@ -32,7 +32,7 @@
             <a>忘记密码?</a>
           </div>
           <div class="flex mt-3 space-x-3">
-            <a-button type="primary" @click.self="handleSubmit" :disabled="loginDisabled" block>登录</a-button>
+            <a-button type="primary" @click="handleSubmit" :disabled="loginDisabled" block>登录</a-button>
           </div>
         </a-form-item>
       </a-form>

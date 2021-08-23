@@ -5,7 +5,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
-    AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
     AForm: typeof import('ant-design-vue/es')['Form']
     AFormItem: typeof import('ant-design-vue/es')['FormItem']
     AInput: typeof import('ant-design-vue/es')['Input']
@@ -19,7 +18,6 @@ declare module 'vue' {
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     BaseList: typeof import('./../src/components/BaseList/BaseList.vue')['default']
-    SearchOutlined: typeof import('@ant-design/icons-vue/SearchOutlined')['default']
     SvgIcon: typeof import('./../src/components/SvgIcon/SvgIcon.vue')['default']
   }
 }

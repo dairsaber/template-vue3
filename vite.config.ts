@@ -36,6 +36,10 @@ export default ({ mode }): UserConfigExport => {
       port: VITE_PORT || 3000,
       // Load proxy configuration from .env
       proxy: createProxy(VITE_PROXY),
+      fs: {
+        // 开发环境不需要严格控制
+        strict: false,
+      },
     },
     plugins: [
       vue(),

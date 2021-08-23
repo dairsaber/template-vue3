@@ -1,6 +1,6 @@
 import type { ProjectConfig } from '#/config'
 
-import { SessionTimeoutProcessingEnum } from '@/enums/appEnum'
+import { SessionTimeoutProcessingEnum } from '@/enums/app.enum'
 
 // ! You need to clear the browser cache after the change
 const setting: ProjectConfig = {

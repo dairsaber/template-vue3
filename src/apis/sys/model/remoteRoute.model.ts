@@ -1,4 +1,4 @@
-import { AppRouteRecordRaw, Component } from '@/route/types'
+import { AppRouteRecordRaw, Component } from '@/@types/route/route'
 
 export interface RemoteRoute extends AppRouteRecordRaw {
   id: number

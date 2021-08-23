@@ -37,4 +37,4 @@ export interface GetUserInfoModel {
   user: UserModel
 }
 
-export type GetCaptchaImageModel = { img: string; code: number; uuid: string; msg: true }
+export type GetCaptchaImageModel = { img: string; code: number; uuid: string }
