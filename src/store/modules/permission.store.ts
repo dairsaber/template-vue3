@@ -6,7 +6,7 @@ import Layout from '@/layout/MainLayout.vue'
 import ParentView from '@/layout/ParentView.vue'
 import constantRoutes from '@/route/constant.route'
 
-const modules = import.meta.glob('../../views/*/*.vue')
+const modules = import.meta.glob('../../views/*/*.page.vue')
 
 export type PermissionState = {
   routes: AppRouteRecordRaw[]

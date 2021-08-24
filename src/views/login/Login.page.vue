@@ -50,7 +50,7 @@
   import { getCaptchaImage } from '@/apis/sys/user.api'
   import { useUserStore } from '@/store/modules/user.store'
 
-  const loginFormModelRef = reactive<LoginParams>({ username: '', password: '', code: '', uuid: '' })
+  const loginFormModelRef = reactive<LoginParams>({ username: 'admin', password: 'admin123', code: '', uuid: '' })
   const loginFormRulesRef = reactive({
     username: [{ required: true, message: '请输入用户名' }],
     password: [{ required: true, message: '请输入用户密码' }],

@@ -3,7 +3,7 @@ import { Result } from '#/axios'
 import { PaginationList } from '@/@types/model/model'
 import { TableState } from 'ant-design-vue/lib/table/interface'
 
-import { computed, reactive, toRaw } from 'vue'
+import { computed, reactive, toRaw, onMounted } from 'vue'
 import * as config from '@/settings/pagination.conf'
 import { useRequest } from '../request/useRequest'
 
@@ -16,7 +16,7 @@ export type ListProps = {
 
 type Pagination = TableState['pagination']
 
-export const usePagination = (props: ListProps) => {
+export const useList = (props: ListProps) => {
   const paginationModel = reactive({
     current: 1,
     pageSize: config.defaultPagesize,
@@ -32,6 +32,10 @@ export const usePagination = (props: ListProps) => {
 
   const { search, loading, result } = useRequest<PaginationList>(props.action, toRaw(searchQuery.value), { rows: [], total: 0 }, (result: Result) => {
     return result.data as PaginationList
+  })
+
+  onMounted(() => {
+    handleSearch()
   })
 
   // 分页事件

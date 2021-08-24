@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-  import BaseList from '@/components/BaseList/BaseList.vue'
+  import BaseList from '@/components/base-list/BaseList.vue'
   import { TableState, TableStateFilters } from 'ant-design-vue/es/table/interface'
   import { getUsers } from '@/apis/sys/users.api'
   import { ref } from 'vue'
@@ -43,16 +43,20 @@
 </script>
 
 <template>
-  <div>
-    <a-space :size="8">
-      <a-input placeholder="请输入昵称搜索" v-model:value="params.searchValue" />
-      <a-button @click="handleSearch">
-        <template #icon>
-          <SearchOutlined />
-        </template>
-        搜索
-      </a-button>
-    </a-space>
-    <base-list class="mt-4" :params="params" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" @change="handleListChange" />
+  <div class="space-y-2">
+    <a-card>
+      <a-space :size="8">
+        <a-input placeholder="请输入昵称搜索" v-model:value="params.searchValue" />
+        <a-button @click="handleSearch">
+          <template #icon>
+            <SearchOutlined />
+          </template>
+          搜索
+        </a-button>
+      </a-space>
+    </a-card>
+    <a-card>
+      <base-list class="mt-4" :params="params" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" @change="handleListChange" />
+    </a-card>
   </div>
 </template>

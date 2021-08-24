@@ -1,7 +1,7 @@
 import { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
 import { antIconNames } from '@/setup/antd'
 import { Component, h, computed, ref, watch, Ref } from 'vue'
-import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
+import SvgIcon from '@/components/svg-icon/SvgIcon.vue'
 // import type { MenuProps } from '@/@types/layout/siderbarMenu'
 import { SubMenu, MenuItem } from 'ant-design-vue'
 import { BarsOutlined } from '@ant-design/icons-vue'

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   // 这边完成的功能就是 根据传进来的 params 查询
   // 分页
-  import { QueryAction, usePagination } from '@/hooks/list/usePagination'
+  import { QueryAction, useList } from '@/hooks/list/useList'
   // import { useAttrs } from 'vue'
   import { TableState, TableProps } from 'ant-design-vue/lib/table/interface'
   import { QueryParams } from '@/@types/request'
@@ -22,8 +22,8 @@
   // }
 
   const props = defineProps<BaseListProps>()
-  // const attrs = useAttrs()
-  const { dataSource, pagination, loading, handleSearch } = usePagination(props)
+
+  const { dataSource, pagination, loading, handleSearch } = useList(props)
 
   defineExpose({ search: handleSearch })
 </script>
