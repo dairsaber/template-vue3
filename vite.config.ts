@@ -18,6 +18,7 @@ export default ({ mode }): UserConfigExport => {
   const root = process.cwd()
   const env = loadEnv(mode, root)
   const { VITE_PORT, VITE_PROXY } = wrapperEnv(env)
+
   return defineConfig({
     resolve: {
       alias: [
@@ -33,7 +34,7 @@ export default ({ mode }): UserConfigExport => {
     },
     server: {
       host: true,
-      port: VITE_PORT || 3000,
+      port: VITE_PORT ?? 3000,
       // Load proxy configuration from .env
       proxy: createProxy(VITE_PROXY),
       fs: {

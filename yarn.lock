@@ -9169,11 +9169,6 @@ vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.10.0:
     lodash "^4.17.21"
     semver "^6.3.0"
 
-vue-i18n@^8.25.0:
-  version "8.25.0"
-  resolved "https://registry.nlark.com/vue-i18n/download/vue-i18n-8.25.0.tgz#1037d9295fa2845a230b771de473481edb2cfc4c"
-  integrity sha1-EDfZKV+ihFojC3cd5HNIHtss/Ew=
-
 vue-jest@^3.0.5:
   version "3.0.7"
   resolved "https://registry.nlark.com/vue-jest/download/vue-jest-3.0.7.tgz#a6d29758a5cb4d750f5d1242212be39be4296a33"

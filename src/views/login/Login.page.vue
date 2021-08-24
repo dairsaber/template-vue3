@@ -43,7 +43,7 @@
 <script lang="ts" setup>
   import { computed, onMounted, reactive, ref, toRaw, watchEffect } from 'vue'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-  import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
+  import SvgIcon from '@/components/svg-icon/SvgIcon.vue'
   import { useRouter, useRoute, LocationQuery } from 'vue-router'
   import { Form } from 'ant-design-vue'
   import { LoginParams } from '@/apis/sys/model/user.model'

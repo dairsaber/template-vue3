@@ -1,12 +1,9 @@
 <script lang="tsx" setup>
   import BaseList from '@/components/base-list/BaseList.vue'
-  import { TableState, TableStateFilters } from 'ant-design-vue/es/table/interface'
   import { getUsers } from '@/apis/sys/users.api'
   import { ref } from 'vue'
   import type { UserModel } from '@/apis/sys/model/user.model'
   import { defineColumns } from '@/utils/component/table.utils'
-
-  type Pagination = TableState['pagination']
 
   const columns = defineColumns<UserModel>([
     {
@@ -29,12 +26,8 @@
     },
   ])
   const params = ref({ searchValue: '' })
-
   const listRef = ref()
   const rowKey = (record: UserModel) => record.userId
-  const handleListChange = (pagination: Pagination, filters: TableStateFilters, sorter: any) => {
-    console.log(`handleListChange`, { pagination, filters, sorter })
-  }
 
   // 搜索
   const handleSearch = () => {
@@ -56,7 +49,7 @@
       </a-space>
     </a-card>
     <a-card>
-      <base-list class="mt-4" :params="params" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" @change="handleListChange" />
+      <base-list class="mt-4" :params="params" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" />
     </a-card>
   </div>
 </template>

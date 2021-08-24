@@ -3,7 +3,7 @@ import { Result } from '#/axios'
 import { PaginationList } from '@/@types/model/model'
 import { TableState } from 'ant-design-vue/lib/table/interface'
 
-import { computed, reactive, toRaw, onMounted } from 'vue'
+import { computed, reactive, toRaw, onMounted, ComputedRef, Ref } from 'vue'
 import * as config from '@/settings/pagination.conf'
 import { useRequest } from '../request/useRequest'
 
@@ -16,7 +16,14 @@ export type ListProps = {
 
 type Pagination = TableState['pagination']
 
-export const useList = (props: ListProps) => {
+export type ListResult = {
+  pagination: ComputedRef<Pagination>
+  dataSource: ComputedRef<unknown[]>
+  loading: Ref<boolean>
+  handleSearch: (page?: number) => void
+}
+
+export const useList = (props: ListProps): ListResult => {
   const paginationModel = reactive({
     current: 1,
     pageSize: config.defaultPagesize,
@@ -57,8 +64,14 @@ export const useList = (props: ListProps) => {
     }
   })
 
-  // 搜索
-  const handleSearch = async () => {
+  /**
+   * 查询
+   * @param page 当前页码
+   */
+  const handleSearch = async (page?: number) => {
+    if (page) {
+      paginationModel.current = page
+    }
     search(toRaw(searchQuery.value))
   }
 
