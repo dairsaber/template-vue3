@@ -1,4 +1,4 @@
-import { onMounted, ref, Ref, UnwrapRef } from 'vue'
+import { ref, Ref, UnwrapRef } from 'vue'
 
 type ResponseFormat<T> = (result: unknown) => T
 
@@ -16,31 +16,20 @@ type RequestReturn<T> = {
  * @param formatter 格式化成想要的值  不传的话就返回原来的
  * @returns 返回格式化的值
  */
-export const useRequest = <T>(
-  action: (params: Recordable) => any,
-  params: Recordable,
-  defaultValue: T,
-  formatter?: ResponseFormat<T>
-): RequestReturn<T> => {
+export const useRequest = <T>(action: (params: Recordable) => any, params: Recordable, defaultValue: T, formatter?: ResponseFormat<T>): RequestReturn<T> => {
   const loading = ref(false)
   const result = ref<T>(defaultValue)
 
   const search: RequestReturn<T>['search'] = async (params) => {
     loading.value = true
-    const res = await action(params)
-    result.value = formatter ? formatter(res) : res
+    try {
+      const res = await action(params)
+      result.value = formatter ? formatter(res) : res
+    } catch (error) {
+      console.error(error)
+    }
     loading.value = false
   }
-
-  onMounted(async () => {
-    try {
-      await search(params)
-    } catch (error) {
-      throw new Error(error)
-    } finally {
-      loading.value = false
-    }
-  })
 
   return { result, loading, search }
 }

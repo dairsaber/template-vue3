@@ -21,7 +21,6 @@
     "pinia": "^2.0.0-rc.6",
     "qs": "^6.10.1",
     "vue": "^3.2.4",
-    "vue-i18n": "^8.25.0",
     "vue-router": "4.0.11"
   },
   "devDependencies": {
@@ -31,8 +30,8 @@
     "@types/node": "^16.7.1",
     "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.7",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
     "@vitejs/plugin-vue": "^1.4.0",
     "@vitejs/plugin-vue-jsx": "^1.1.7",
     "@vue/cli-plugin-babel": "^4.5.13",
@@ -52,7 +51,7 @@
     "lint-staged": "^11.1.2",
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
-    "sass": "^1.38.0",
+    "sass": "^1.38.1",
     "sass-loader": "^12.1.0",
     "scss": "^0.2.4",
     "tailwindcss": "^2.2.7",

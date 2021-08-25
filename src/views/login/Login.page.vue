@@ -43,27 +43,27 @@
 <script lang="ts" setup>
   import { computed, onMounted, reactive, ref, toRaw, watchEffect } from 'vue'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-  import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
+  import SvgIcon from '@/components/svg-icon/SvgIcon.vue'
   import { useRouter, useRoute, LocationQuery } from 'vue-router'
   import { Form } from 'ant-design-vue'
   import { LoginParams } from '@/apis/sys/model/user.model'
   import { getCaptchaImage } from '@/apis/sys/user.api'
   import { useUserStore } from '@/store/modules/user.store'
 
-  const useForm = Form.useForm
-
-  const loginFormModelRef = reactive<LoginParams>({ username: '', password: '', code: '', uuid: '' })
-
+  const loginFormModelRef = reactive<LoginParams>({ username: 'admin', password: 'admin123', code: '', uuid: '' })
   const loginFormRulesRef = reactive({
     username: [{ required: true, message: '请输入用户名' }],
     password: [{ required: true, message: '请输入用户密码' }],
     code: [{ required: true, message: '请输入验证码' }],
   })
-  const redirectRef = ref('')
-  const queryRef = ref<LocationQuery>({})
 
   const codeUrl = ref('')
+  // 禁止登录状态规则判断
+  const loginDisabled = computed(() => {
+    return loginFormModelRef.username.trim() === '' || loginFormModelRef.password.trim() === '' || loginFormModelRef.code.trim() === ''
+  })
 
+  // 获得验证码
   const getSmsCode = async () => {
     const result = await getCaptchaImage()
     codeUrl.value = 'data:image/gif;base64,' + result.data?.img
@@ -73,11 +73,20 @@
     getSmsCode()
   })
 
-  // 禁止登录状态规则判断
-  const loginDisabled = computed(() => {
-    return loginFormModelRef.username.trim() === '' || loginFormModelRef.password.trim() === '' || loginFormModelRef.code.trim() === ''
+  // 页面根据url初始参数设置
+  const redirectRef = ref('')
+  const queryRef = ref<LocationQuery>({})
+  const route = useRoute()
+  watchEffect(() => {
+    const query = route.query
+    if (query) {
+      redirectRef.value = query['redirect']?.toString() ?? ''
+      queryRef.value = getOtherQuery(query)
+    }
   })
 
+  // 登录
+  const useForm = Form.useForm
   const { validate, validateInfos } = useForm(loginFormModelRef, loginFormRulesRef)
   const userStore = useUserStore()
   const router = useRouter()
@@ -97,16 +106,6 @@
       console.error(`error`, error)
     }
   }
-
-  const route = useRoute()
-
-  watchEffect(() => {
-    const query = route.query
-    if (query) {
-      redirectRef.value = query['redirect']?.toString() ?? ''
-      queryRef.value = getOtherQuery(query)
-    }
-  })
 
   function getOtherQuery(query: LocationQuery) {
     return Object.keys(query).reduce((acc, cur) => {

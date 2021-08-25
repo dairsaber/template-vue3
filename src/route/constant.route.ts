@@ -7,7 +7,7 @@ const constantRoutes: AppRouteRecordRaw[] = [
     path: '/login',
     name: 'Login',
     hidden: true,
-    component: () => import('@/views/login/Login.vue'),
+    component: () => import('@/views/login/Login.page.vue'),
     meta: { title: '用户登录' },
   },
   {
@@ -20,19 +20,19 @@ const constantRoutes: AppRouteRecordRaw[] = [
       {
         path: 'home',
         name: 'Home',
-        component: () => import('@/views/dashboard/DashBoard.vue'),
+        component: () => import('@/views/dashboard/DashBoard.page.vue'),
         meta: { title: '控制台', icon: 'DashboardOutlined' },
       },
       {
         path: 'users',
         name: 'UserManage',
-        component: () => import('@/views/user/UserManager.vue'),
+        component: () => import('@/views/user/UserManager.page.vue'),
         meta: { title: '用户管理', icon: 'DashboardOutlined' },
       },
       {
         path: 'icons',
         name: 'SvgIcon',
-        component: () => import('@/views/icons/SvgIcons.vue'),
+        component: () => import('@/views/icons/SvgIcons.page.vue'),
         meta: { title: 'SvgIcon', icon: 'svg-all' },
       },
     ],
@@ -41,7 +41,7 @@ const constantRoutes: AppRouteRecordRaw[] = [
     path: '/:pathMatch(.*)',
     name: 'Page404',
     hidden: true,
-    component: () => import('@/views/error-page/404.vue'),
+    component: () => import('@/views/error-page/404.page.vue'),
     meta: {
       title: 'page404',
       noCache: true,
