@@ -2,28 +2,27 @@ import { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
 import { antIconNames } from '@/setup/antd'
 import { Component, h, computed, ref, watch, Ref } from 'vue'
 import SvgIcon from '@/components/svg-icon/SvgIcon.vue'
-// import type { MenuProps } from '@/@types/layout/siderbarMenu'
+
 import { SubMenu, MenuItem } from 'ant-design-vue'
 import { BarsOutlined } from '@ant-design/icons-vue'
-import { usePermissionStore } from '@/store/modules/permission.store'
+import { MenuRoute, usePermissionStore } from '@/store/modules/permission.store'
 import { Icons } from '@/setup/antd'
-import { isUrl } from '@/utils/is'
 
 type MenuConfig = {
   components: Component[]
-  routeMap: Recordable<RemoteRoute>
+  routeMap: Recordable<MenuRoute>
 }
 type SubMenuConfig = {
   component: Component
-  routeMap: Recordable<RemoteRoute>
+  routeMap: Recordable<MenuRoute>
 }
 
 export const useMenu = (): Ref<MenuConfig> => {
   const menuStore = usePermissionStore()
 
   // 将静态路由/下的menu展平在menu中
-  const menus = computed((): RemoteRoute[] => {
-    let routes = [...(menuStore.routes as RemoteRoute[])]
+  const menus = computed((): MenuRoute[] => {
+    let routes = [...menuStore.routes]
     const mainRoute = routes.find((route) => route.path === '')
     if (mainRoute) {
       const index = routes.indexOf(mainRoute)
@@ -35,9 +34,9 @@ export const useMenu = (): Ref<MenuConfig> => {
 
   const menuConfig = ref<MenuConfig>({ components: [], routeMap: {} })
   // 导出routeMap的原因是 在外面当做字典
-  const generateMenu = (menus: RemoteRoute[], basePath = ''): MenuConfig => {
+  const generateMenu = (menus: MenuRoute[]): MenuConfig => {
     const menuComponents: Component[] = []
-    const routeMap: Recordable<RemoteRoute> = {}
+    const routeMap: Recordable<MenuRoute> = {}
 
     menus.forEach((menu) => {
       const { hidden, children } = menu
@@ -45,11 +44,11 @@ export const useMenu = (): Ref<MenuConfig> => {
       if (hidden) return
 
       if (children && children.length > 0) {
-        const { component, routeMap: rm } = generateSubMenu(menu, basePath)
+        const { component, routeMap: rm } = generateSubMenu(menu)
         menuComponents.push(component)
         Object.assign(routeMap, rm)
       } else {
-        const { component, routeMap: rm } = generateMenuItem(menu, basePath)
+        const { component, routeMap: rm } = generateMenuItem(menu)
         menuComponents.push(component)
         Object.assign(routeMap, rm)
       }
@@ -57,13 +56,14 @@ export const useMenu = (): Ref<MenuConfig> => {
     return { components: menuComponents, routeMap }
   }
 
-  const generateSubMenu = (menu: RemoteRoute, basePath: string): SubMenuConfig => {
-    const { meta, children } = menu
-    const path = menu.path.replace('/', '')
-    const currentPath = `${basePath}/${path}`
+  const generateSubMenu = (menu: MenuRoute): SubMenuConfig => {
+    const { meta, children, fullPath } = menu
+
+    const currentPath = fullPath
+
     const { title = '未设置', icon } = meta ?? {}
 
-    const { components, routeMap: rm } = generateMenu(children!, currentPath)
+    const { components, routeMap: rm } = generateMenu(children!)
     const iconComponent = getIconComponent(icon)
     const slots: Recordable<() => Component | null> = { icon: () => iconComponent }
     const component = (
@@ -75,22 +75,13 @@ export const useMenu = (): Ref<MenuConfig> => {
     return { component, routeMap: { [currentPath]: menu, ...rm } }
   }
 
-  const generateMenuItem = (menu: RemoteRoute, basePath: string): SubMenuConfig => {
-    const { meta } = menu
+  const generateMenuItem = (menu: MenuRoute): SubMenuConfig => {
+    const { meta, fullPath } = menu
     const { title = '未设置', icon } = meta ?? {}
     const iconComponent = getIconComponent(icon)
     const slots: Recordable<() => Component | null> = { icon: () => iconComponent }
 
-    let currentPath: string
-    let path = menu.path
-    // 对url地址进行特殊处理
-    if (isUrl(path)) {
-      currentPath = path
-    } else {
-      path = path.replace('/', '')
-      currentPath = `${basePath}/${path}`
-    }
-
+    const currentPath = fullPath
     const component = (
       <MenuItem key={currentPath} v-slots={slots}>
         {title}

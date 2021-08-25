@@ -5,12 +5,18 @@ import { defineStore } from 'pinia'
 import Layout from '@/layout/MainLayout.vue'
 import ParentView from '@/layout/ParentView.vue'
 import constantRoutes from '@/route/constant.route'
+import { isString, isUrl } from '@/utils/is'
 
 const modules = import.meta.glob('../../views/*/*.page.vue')
-
+export type MenuRoute = RemoteRoute & {
+  // 全路径
+  fullPath: string
+  children: MenuRoute[]
+  // 路径层级Id数组
+  allPath: string[]
+}
 export type PermissionState = {
-  routes: AppRouteRecordRaw[]
-  dynamicRoutes: AppRouteRecordRaw[]
+  routes: MenuRoute[]
 }
 
 export const usePermissionStore = defineStore({
@@ -18,20 +24,19 @@ export const usePermissionStore = defineStore({
   // a function that returns a fresh state
   state: (): PermissionState => ({
     routes: [],
-    dynamicRoutes: [],
   }),
 
   // optional actions
   actions: {
     async setRoutes(): Promise<RemoteRoute[]> {
       const res = await getRoutesList()
-      // const menus = res.data.slice(0, 2)
-      const menus = res.data
-      if (menus && menus.length) {
-        const remoteRoutes = asyncJsonRoutes(menus)
-        this.routes = remoteRoutes.concat(constantRoutes as RemoteRoute[])
-        return remoteRoutes
-      }
+
+      const menus = res.data ?? []
+      const routes = menus.concat(constantRoutes as RemoteRoute[])
+
+      this.routes = asyncJsonRoutes(routes)
+      return this.routes
+
       return []
     },
   },
@@ -43,7 +48,7 @@ const hasPermission = (roles: string[], route: AppRouteRecordRaw): boolean => {
   }
   return true
 }
-
+// TODO 前端菜单权限还没做
 export const filterAsyncRoutes = (routes: AppRouteRecordRaw[], roles: string[]): AppRouteRecordRaw[] => {
   const res: AppRouteRecordRaw[] = []
   routes.forEach((route) => {
@@ -58,9 +63,10 @@ export const filterAsyncRoutes = (routes: AppRouteRecordRaw[], roles: string[]):
   return res
 }
 
-export const asyncJsonRoutes = (routes: RemoteRoute[]): RemoteRoute[] => {
-  const asyncRouters = routes.filter((route: RemoteRoute) => {
-    if (route.component) {
+export const asyncJsonRoutes = (routes: RemoteRoute[], basePath = '', allPath: string[] = []): MenuRoute[] => {
+  // 对url地址进行特殊处理
+  const asyncRouters = routes.map((route: MenuRoute) => {
+    if (route.component && isString(route.component)) {
       if (route.component === 'Layout') {
         route.component = Layout
       } else if (route.component === 'ParentView') {
@@ -69,11 +75,19 @@ export const asyncJsonRoutes = (routes: RemoteRoute[]): RemoteRoute[] => {
         route.component = loadView(route.component)
       }
     }
+
+    // 组装fullPath
+    const fullPath = getFullPath(route, basePath)
+    route.fullPath = fullPath
+    // 存储全部层级的路径地址
+    const currentAllPath = [...allPath, fullPath]
+    route.allPath = currentAllPath
     // 如果有子路由，递归添加
     if (route.children && route.children.length) {
-      asyncJsonRoutes(route.children)
+      asyncJsonRoutes(route.children, fullPath, currentAllPath)
     }
-    return true
+
+    return route
   })
   return asyncRouters
 }
@@ -81,4 +95,16 @@ export const asyncJsonRoutes = (routes: RemoteRoute[]): RemoteRoute[] => {
 const loadView = (view: string) => {
   const viewReg = view.replace('index', 'Index')
   return modules[`../../views/${viewReg}.vue`]
+}
+function getFullPath(route: RemoteRoute, basePath: string): string {
+  let path = route.path
+  let fullPath: string
+  if (isUrl(path)) {
+    fullPath = path
+  } else {
+    path = path.replace('/', '')
+    basePath = basePath.replace(/\/*$/, '')
+    fullPath = `${basePath}/${path}`
+  }
+  return fullPath
 }

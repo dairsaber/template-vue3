@@ -56,3 +56,7 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 - 枚举文件以 .enum.ts 结尾 `app.enum.ts`
 - 路由文件 以.route.ts 结尾 `constant.route.ts`
 - 页面文件 以.page.ts 结尾 `Login.page.ts`
+
+### 使用注意
+
+- vue3 现在仍处于踩坑阶段 尽量少用 tsx jsx 等 这边会出现 一些特性支持不是很完全
