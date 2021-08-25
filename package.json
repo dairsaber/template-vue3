@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
+    "@vitejs/plugin-vue": "^1.6.0",
     "ant-design-vue": "^2.2.6",
     "axios": "^0.21.1",
     "js-cookie": "^3.0.0",
@@ -32,7 +33,6 @@
     "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
-    "@vitejs/plugin-vue": "^1.6.0",
     "@vitejs/plugin-vue-jsx": "^1.1.7",
     "@vue/cli-plugin-babel": "^4.5.13",
     "@vue/cli-plugin-unit-jest": "^4.5.13",
