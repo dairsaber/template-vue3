@@ -10,6 +10,7 @@
       <a-layout-header style="background: #fff; padding: 0">
         <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
         <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
+        <Breadcrunb />
       </a-layout-header>
       <a-layout-content class="min-h-full p-6 mx-6 my-4 bg-white">
         <router-view />
@@ -18,9 +19,9 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-  // import { UserOutlined, VideoCameraOutlined, UploadOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
   import { ref } from 'vue'
   import SiderBarMenu from './components/SiderBarMenu.vue'
+  import Breadcrunb from './components/Breadcrunb.vue'
   const collapsed = ref<boolean>(false)
 </script>
 <style lang="scss" scoped>
