@@ -16,7 +16,6 @@
   const userStore = useUserStore()
   const handleLogout = () => {
     userStore.logout()
-    window.location.href = '/login'
   }
 </script>
 

@@ -64,6 +64,7 @@ export const useUserStore = defineStore({
       removeToken()
       this.resetToken()
       resetRouter()
+      window.location.href = '/login'
     },
   },
 })

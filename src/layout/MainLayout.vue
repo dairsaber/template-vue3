@@ -7,13 +7,16 @@
     </a-layout-sider>
     <a-layout :style="{ marginLeft: collapsed ? '80px' : '200px' }" class="main-layout">
       <!-- header -->
-      <a-layout-header style="background: #fff; padding: 0">
-        <div class="space-x-4">
-          <div class="inline-block text-2xl">
-            <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
-            <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
+      <a-layout-header style="background-color: #fff; padding-left: 8px; padding-right: 16px">
+        <div class="flex justify-between">
+          <div class="space-x-4">
+            <div class="inline-block text-2xl">
+              <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
+              <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
+            </div>
+            <Breadcrumb class="inline-block" />
           </div>
-          <Breadcrumb class="inline-block" />
+          <UserDropdown />
         </div>
       </a-layout-header>
       <a-layout-content class="mx-4 my-6">
@@ -26,6 +29,7 @@
   import { ref } from 'vue'
   import SiderBarMenu from './components/SiderBarMenu.vue'
   import Breadcrumb from './components/Breadcrumb.vue'
+  import UserDropdown from './components/UserDropdown.vue'
   const collapsed = ref<boolean>(false)
 </script>
 <style lang="scss" scoped>
