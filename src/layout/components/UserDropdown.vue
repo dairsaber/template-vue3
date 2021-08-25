@@ -24,17 +24,17 @@
     <a class="ant-dropdown-link" @click.prevent>
       <a-avatar style="background-color: #87d068">
         <template #icon>
-          <UserOutlined style="vertical-align: 3px" />
+          <base-icon icon="UserOutlined" />
         </template>
       </a-avatar>
     </a>
     <template #overlay>
       <a-menu>
         <a-menu-item>
-          <a @click.self="handleMenuClick(ActionKey.USER_CENTER)"> <UserOutlined style="vertical-align: 1px" /> 个人中心</a>
+          <a @click.self="handleMenuClick(ActionKey.USER_CENTER)"> <base-icon icon="UserOutlined" /> 个人中心</a>
         </a-menu-item>
         <a-menu-item>
-          <a @click.self="handleMenuClick(ActionKey.LOGOUT)"><LogoutOutlined style="vertical-align: 1px" /> 退出</a>
+          <a @click.self="handleMenuClick(ActionKey.LOGOUT)"><base-icon icon="LogoutOutlined" /> 退出</a>
         </a-menu-item>
       </a-menu>
     </template>

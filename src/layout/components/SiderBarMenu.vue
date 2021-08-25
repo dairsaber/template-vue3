@@ -11,7 +11,6 @@
     //! TSX 这边props只能这么定义 如果用ts类型推断 会推断不出来
     props: { theme: { type: String, default: 'dark' }, multiple: Boolean },
     setup(props) {
-      console.log(`props`, props)
       const menuConfig = useMenu()
 
       // 当前激活key

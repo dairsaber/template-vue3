@@ -1,12 +1,10 @@
-import { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
 import { antIconNames } from '@/setup/antd'
 import { Component, h, computed, ref, watch, Ref } from 'vue'
-import SvgIcon from '@/components/svg-icon/SvgIcon.vue'
+import BaseIcon from '@/components/base-icon/BaseIcon.vue'
 
 import { SubMenu, MenuItem } from 'ant-design-vue'
 import { BarsOutlined } from '@ant-design/icons-vue'
 import { MenuRoute, usePermissionStore } from '@/store/modules/permission.store'
-import { Icons } from '@/setup/antd'
 
 type MenuConfig = {
   components: Component[]
@@ -92,15 +90,13 @@ export const useMenu = (): Ref<MenuConfig> => {
   }
 
   const getIconComponent = (icon?: string): Component | null => {
-    let iconComponent: Component = h(BarsOutlined)
+    const iconComponent: Component = h(BarsOutlined)
     // 处理图标
     if (icon) {
       const isSvg = icon.startsWith('svg-')
-      if (isSvg) {
-        const iconName = icon.substring(4)
-        iconComponent = <SvgIcon icon={iconName} />
-      } else if (antIconNames.includes(icon)) {
-        iconComponent = h(Icons[icon])
+      if (isSvg || antIconNames.includes(icon)) {
+        const iconName = icon.replace(/^(svg-)/, '')
+        return <BaseIcon icon={iconName} />
       }
     }
 
