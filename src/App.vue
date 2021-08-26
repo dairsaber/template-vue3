@@ -1,9 +1,10 @@
 <template>
-  <AppProvider>
+  <ConfigProvider :locale="zh_CN">
     <router-view />
-  </AppProvider>
+  </ConfigProvider>
 </template>
 
 <script setup lang="ts">
-  import AppProvider from '@/components/app-provider/AppProvider.vue'
+  import zh_CN from 'ant-design-vue/lib/locale/zh_CN'
+  import { ConfigProvider } from 'ant-design-vue'
 </script>

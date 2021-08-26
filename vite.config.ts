@@ -1,24 +1,23 @@
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import viteComponents, { AntDesignVueResolver } from 'vite-plugin-components'
-import viteSvgIcons from 'vite-plugin-svg-icons'
-
-import { defineConfig, UserConfigExport } from 'vite'
-import path from 'path'
+import { defineConfig, UserConfigExport, ConfigEnv } from 'vite'
 import { loadEnv } from 'vite'
 import { createProxy } from './build/vite/proxy'
 import { wrapperEnv } from './build/utils'
+import { createVitePlugins } from './build/vite/plugin'
+import path from 'path'
+import { OUTPUT_DIR } from './build/constant'
+
 // 解析文件夹
-function pathResolve(dir) {
+function pathResolve(dir: string) {
   return path.resolve(__dirname, dir)
 }
 
 // https://vitejs.dev/config/
-export default ({ mode }): UserConfigExport => {
+export default ({ mode, command }: ConfigEnv): UserConfigExport => {
   const root = process.cwd()
   const env = loadEnv(mode, root)
-  const { VITE_PORT, VITE_PROXY } = wrapperEnv(env)
-
+  const isBuild = command === 'build'
+  const viteEnv = wrapperEnv(env)
+  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv
   return defineConfig({
     resolve: {
       alias: [
@@ -33,6 +32,7 @@ export default ({ mode }): UserConfigExport => {
       ],
     },
     server: {
+      base: VITE_PUBLIC_PATH,
       host: true,
       port: VITE_PORT ?? 3000,
       // Load proxy configuration from .env
@@ -42,17 +42,20 @@ export default ({ mode }): UserConfigExport => {
         strict: false,
       },
     },
-    plugins: [
-      vue(),
-      vueJsx(),
-      viteComponents({
-        globalComponentsDeclaration: pathResolve('./types/components.d.ts'),
-        customComponentResolvers: [AntDesignVueResolver()],
-      }),
-      viteSvgIcons({
-        iconDirs: [pathResolve('src/assets/icons')],
-        symbolId: 'svg-[name]',
-      }),
-    ],
+    build: {
+      target: 'es2015',
+      outDir: OUTPUT_DIR,
+      terserOptions: {
+        compress: {
+          keep_infinity: true,
+          // 在生产环境删除console
+          drop_console: VITE_DROP_CONSOLE,
+        },
+      },
+      // 关闭 brotliSize 可略微提升打包时间
+      brotliSize: false,
+      chunkSizeWarningLimit: 2000,
+    },
+    plugins: createVitePlugins(viteEnv, isBuild),
   })
 }
