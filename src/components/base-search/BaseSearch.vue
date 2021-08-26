@@ -11,9 +11,8 @@
 
 <template>
   <div>
+    <slot></slot>
     <a-space :size="8">
-      <slot></slot>
-
       <a-button type="primary" @click="handleSearch">
         <template #icon><base-icon icon="SearchOutlined" /></template>
         搜索

@@ -5,7 +5,42 @@
   import { getUsers } from '@/apis/sys/users.api'
   import { ref } from 'vue'
   import type { UserModel } from '@/apis/sys/model/user.model'
-  import { defineColumns } from '@/utils/component/table.utils'
+  import { defineColumns, getOperation } from '@/utils/component/table.utils'
+
+  const operationColumn = getOperation<UserModel>([
+    {
+      title: '审核',
+      icon: 'all',
+      action: (record) => {
+        console.log(`record`, record)
+      },
+    },
+    {
+      title: '修改',
+      icon: 'EditOutlined',
+      type: 'WARN',
+      action: (record) => {
+        console.log(`record`, record)
+      },
+    },
+    {
+      title: '删除',
+      icon: 'DeleteOutlined',
+      type: 'DANGER',
+      action: (record) => {
+        console.log(`record`, record)
+      },
+    },
+
+    {
+      title: '详情',
+      icon: 'all',
+      type: 'INFO',
+      action: (record) => {
+        console.log(`record`, record)
+      },
+    },
+  ])
 
   const columns = defineColumns<UserModel>([
     {
@@ -26,6 +61,7 @@
         return <a-tag>{record.email}</a-tag>
       },
     },
+    operationColumn,
   ])
 
   const paramsRef = ref({ searchValue: '' })
@@ -41,7 +77,10 @@
   <div class="space-y-2">
     <a-card>
       <BaseSearch :params="paramsRef" @search="search" @reset="reset">
-        <a-input placeholder="请输入昵称搜索" v-model:value="paramsRef.searchValue" />
+        <a-space :size="8" class="mb-2 mr-2">
+          <a-input placeholder="请输入昵称搜索" v-model:value="paramsRef.searchValue" />
+          <a-input placeholder="请输入昵称搜索" v-model:value="paramsRef.searchValue" />
+        </a-space>
       </BaseSearch>
     </a-card>
 
