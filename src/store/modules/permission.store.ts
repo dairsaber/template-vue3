@@ -7,7 +7,8 @@ import ParentView from '@/layout/ParentView.vue'
 import constantRoutes from '@/route/constant.route'
 import { isString, isUrl } from '@/utils/is'
 
-const modules = import.meta.glob('../../views/*/*.page.vue')
+const modules = import.meta.glob('../../views/**/*.page.vue')
+
 export type MenuRoute = RemoteRoute & {
   // 全路径
   fullPath: string
@@ -36,8 +37,6 @@ export const usePermissionStore = defineStore({
 
       this.routes = asyncJsonRoutes(routes)
       return this.routes
-
-      return []
     },
   },
 })
@@ -94,7 +93,7 @@ export const asyncJsonRoutes = (routes: RemoteRoute[], basePath = '', allPath: s
 
 const loadView = (view: string) => {
   const viewReg = view.replace('index', 'Index')
-  return modules[`../../views/${viewReg}.vue`]
+  return modules[`../../views/${viewReg}.page.vue`]
 }
 function getFullPath(route: RemoteRoute, basePath: string): string {
   let path = route.path

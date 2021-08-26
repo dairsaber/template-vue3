@@ -7,9 +7,11 @@ import { RouteLocationNormalized } from 'vue-router'
 import { usePermissionStore } from '@/store/modules/permission.store'
 import { useUserStore } from '@/store/modules/user.store'
 import { isUrl } from '@/utils/is'
+import { toRaw } from 'vue'
+
 NProgress.configure({ showSpinner: false })
 
-router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized, next: any) => {
+router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: any) => {
   NProgress.start()
 
   const permissionStore = usePermissionStore()
@@ -23,16 +25,24 @@ router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized
       if (userStore.roles.length === 0) {
         try {
           await userStore.getUserInfo()
-          const accessRoutes = await permissionStore.setRoutes()
+          await permissionStore.setRoutes()
 
-          accessRoutes.forEach((route) => {
+          permissionStore.routes.forEach((route) => {
             // 这边过滤掉url的路由
             if (isUrl(route.path)) return false
-            router.addRoute(route)
+            router.addRoute(toRaw(route))
           })
-          // Hack: ensure addRoutes is complete
-          // Set the replace: true, so the navigation will not leave a history record
-          next({ ...to, replace: true })
+
+          if (to.name === 'Page404') {
+            // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
+            // fix: 添加query以免丢失
+            next({ path: to.fullPath, replace: true, query: to.query })
+          } else {
+            const redirectPath = (from.query.redirect || to.path) as string
+            const redirect = decodeURIComponent(redirectPath)
+            const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect }
+            next(nextData)
+          }
         } catch (err) {
           console.error(err)
           // Remove token and redirect to login page

@@ -20,12 +20,12 @@ export type Operation<T extends Recordable> = {
 }
 
 // 增强了几个常用的 类型
-export type EnhanceColumnProps<T extends Recordable = {}> = Omit<ColumnProps, 'customRender'> & {
+export type EnhanceColumnProps<T extends Recordable> = Omit<ColumnProps, 'customRender'> & {
   customRender?: (params: CustomRenderParams<T>) => string | Slot | Element | VNode
   dataIndex: keyof T
 }
 
-export const defineColumns = <T extends Recordable = {}>(columns: EnhanceColumnProps<T>[]): EnhanceColumnProps<T>[] => {
+export const defineColumns = <T extends Recordable>(columns: EnhanceColumnProps<T>[]): EnhanceColumnProps<T>[] => {
   return columns
 }
 

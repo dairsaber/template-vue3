@@ -33,20 +33,6 @@ const constantRoutes: AppRouteRecordRaw[] = [
     ],
   },
   {
-    path: '/system',
-    component: () => import('@/layout/MainLayout.vue'),
-    redirect: '/system/users',
-    meta: { title: '首页', isLayout: true, breadcrumb: false },
-    children: [
-      {
-        path: 'users',
-        name: 'UserManage',
-        component: () => import('@/views/user/UserManager.page.vue'),
-        meta: { title: '用户管理', icon: 'DashboardOutlined' },
-      },
-    ],
-  },
-  {
     path: '/:pathMatch(.*)',
     name: 'Page404',
     hidden: true,
