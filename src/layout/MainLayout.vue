@@ -23,7 +23,7 @@
     </a-layout-sider>
     <a-layout :style="{ marginLeft: collapsed ? '80px' : '200px' }" class="main-layout">
       <!-- header -->
-      <a-layout-header style="padding-left: 8px; background: transparent; padding-right: 16px">
+      <a-layout-header class="layout-header">
         <div class="flex justify-between">
           <div class="space-x-4">
             <a-button
@@ -52,6 +52,14 @@
     background: rgba(255, 255, 255, 0.3);
     margin: 16px;
   }
+  .layout-header {
+    padding-left: 8px;
+    background: transparent;
+    padding-right: 16px;
+    height: 48px;
+    line-height: 48px;
+  }
+
   .main-layout {
     transition: all 0.2s;
   }

@@ -21,20 +21,26 @@
 
 <template>
   <a-dropdown>
-    <a class="ant-dropdown-link" @click.prevent>
+    <a class="px-4 space-x-2 hover:bg-gray-200 hover:text-gray-50 ant-dropdown-link" @click.prevent>
       <a-avatar style="background-color: #87d068">
         <template #icon>
-          <base-icon icon="UserOutlined" />
+          <span v-if="userStore.user?.nickName">{{ userStore.user?.nickName[0] }}</span>
+          <base-icon v-else icon="UserOutlined" />
         </template>
       </a-avatar>
+      <span class="text-xs text-gray-600">{{ userStore.user?.nickName }}</span>
     </a>
     <template #overlay>
       <a-menu>
         <a-menu-item>
-          <a @click.self="handleMenuClick(ActionKey.USER_CENTER)"> <base-icon icon="UserOutlined" /> 个人中心</a>
+          <a @click.self="handleMenuClick(ActionKey.USER_CENTER)">
+            <base-icon icon="UserOutlined" /> 个人中心</a
+          >
         </a-menu-item>
         <a-menu-item>
-          <a @click.self="handleMenuClick(ActionKey.LOGOUT)"><base-icon icon="LogoutOutlined" /> 退出</a>
+          <a @click.self="handleMenuClick(ActionKey.LOGOUT)"
+            ><base-icon icon="LogoutOutlined" /> 退出</a
+          >
         </a-menu-item>
       </a-menu>
     </template>
