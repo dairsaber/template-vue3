@@ -38,8 +38,8 @@
           >
         </a-menu-item>
         <a-menu-item>
-          <a @click.self="handleMenuClick(ActionKey.LOGOUT)"
-            ><base-icon icon="LogoutOutlined" /> 退出</a
+          <a @click.self="handleMenuClick(ActionKey.LOGOUT)">
+            <base-icon icon="LogoutOutlined" /> 退出</a
           >
         </a-menu-item>
       </a-menu>

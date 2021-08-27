@@ -1,5 +1,5 @@
 import { ColumnProps } from 'ant-design-vue/lib/table/interface'
-import { Slot, VNode, withModifiers } from 'vue'
+import { Slot, toRaw, VNode, withModifiers } from 'vue'
 import { Button, Dropdown, Menu, MenuItem } from 'ant-design-vue'
 import BaseIcon from '@/components/base-icon/BaseIcon.vue'
 import { colorTypes, ColorType } from '@/settings/color.conf'
@@ -23,7 +23,9 @@ export type EnhanceColumnProps<T extends Recordable> = Omit<ColumnProps, 'custom
   dataIndex: keyof T
 }
 
-export const defineColumns = <T extends Recordable>(columns: EnhanceColumnProps<T>[]): EnhanceColumnProps<T>[] => {
+export const defineColumns = <T extends Recordable>(
+  columns: EnhanceColumnProps<T>[]
+): EnhanceColumnProps<T>[] => {
   return columns
 }
 
@@ -33,7 +35,10 @@ export const defineColumns = <T extends Recordable>(columns: EnhanceColumnProps<
  * @param splitNumber 分割位置 从第二个操作分割还是什么的
  * @returns {CustomRenderParams}
  */
-export const getOperation = <T extends Recordable>(options: Operation<T>[], splitNumber = 2): EnhanceColumnProps<T> => {
+export const getOperation = <T extends Recordable>(
+  options: Operation<T>[],
+  splitNumber = 2
+): EnhanceColumnProps<T> => {
   const flatParts = options.slice(0, splitNumber)
   const mixParts = options.slice(splitNumber)
   if (flatParts.length === 0) {
@@ -47,11 +52,12 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
   const flatPartVNodes: (record: T) => VNode[] = (record) =>
     flatParts.map((option) => (
       <Button
+        type="dashed"
         onClick={withModifiers(() => {
           option.action(record)
         }, ['self'])}
         size="small"
-        style={{ backgroundColor: getType(option.type), color: '#fff', whiteSpace: 'nowrap' }}
+        style={{ color: getType(option.type), whiteSpace: 'nowrap' }}
         v-slots={{ icon: () => <BaseIcon icon={option.icon} /> }}
       >
         {option.title}
@@ -60,15 +66,10 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
 
   let mixPartVNode: (record: T) => VNode | null = () => null
   if (mixParts.length > 0) {
-    const items: (record: T) => VNode[] = (record) =>
-      mixParts.map((option) => {
+    const items: () => VNode[] = () =>
+      mixParts.map((option, index) => {
         return (
-          <MenuItem
-            onClick={withModifiers(() => {
-              option.action(record)
-            }, ['self'])}
-            style={{ color: getType(option.type) }}
-          >
+          <MenuItem key={index} style={{ color: getType(option.type) }}>
             <BaseIcon icon={option.icon} /> {option.title}
           </MenuItem>
         )
@@ -77,7 +78,16 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
     mixPartVNode = (record: T): VNode => (
       <Dropdown
         v-slots={{
-          overlay: () => <Menu>{items(record)}</Menu>,
+          overlay: () => (
+            <Menu
+              onClick={({ key }) => {
+                console.log(`key`, key)
+                mixParts[key]?.action(record)
+              }}
+            >
+              {items()}
+            </Menu>
+          ),
         }}
       >
         <a onClick={withModifiers(() => {}, ['prevent'])}>
@@ -95,10 +105,11 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
     align: 'center',
     width: 0,
     customRender: ({ record }) => {
+      const recordRaw = toRaw(record)
       return (
         <div class="space-x-2 whitespace-nowrap">
-          {flatPartVNodes(record)}
-          {mixPartVNode(record)}
+          {flatPartVNodes(recordRaw)}
+          {mixPartVNode(recordRaw)}
         </div>
       )
     },

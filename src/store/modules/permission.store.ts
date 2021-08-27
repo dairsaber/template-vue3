@@ -1,13 +1,11 @@
+import { useUserStore } from '@/store/modules/user.store'
 import type { RemoteRoute } from '@/apis/sys/model/remoteRoute.model'
-import type { AppRouteRecordRaw } from '@/@types/route/route'
 import { getRoutesList } from '@/apis/sys/menu.api'
 import { defineStore } from 'pinia'
 import Layout from '@/layout/MainLayout.vue'
 import ParentView from '@/layout/ParentView.vue'
 import constantRoutes from '@/route/constant.route'
 import { isString, isUrl } from '@/utils/is'
-
-const modules = import.meta.glob('../../views/**/*.page.vue')
 
 export type MenuRoute = RemoteRoute & {
   // 全路径
@@ -34,22 +32,23 @@ export const usePermissionStore = defineStore({
 
       const menus = res.data ?? []
       const routes = menus.concat(constantRoutes as RemoteRoute[])
-
-      this.routes = asyncJsonRoutes(routes)
+      const userStore = useUserStore()
+      const filterRoutes = filterAsyncRoutes(routes, userStore.roles)
+      this.routes = asyncJsonRoutes(filterRoutes)
       return this.routes
     },
   },
 })
 
-const hasPermission = (roles: string[], route: AppRouteRecordRaw): boolean => {
+const hasPermission = (roles: string[], route: RemoteRoute): boolean => {
   if (route.roles) {
     return roles.some((role) => route.roles?.includes(role))
   }
   return true
 }
-// TODO 前端菜单权限还没做
-export const filterAsyncRoutes = (routes: AppRouteRecordRaw[], roles: string[]): AppRouteRecordRaw[] => {
-  const res: AppRouteRecordRaw[] = []
+// 根据角色过滤路由菜单
+export const filterAsyncRoutes = (routes: RemoteRoute[], roles: string[]): RemoteRoute[] => {
+  const res: RemoteRoute[] = []
   routes.forEach((route) => {
     const r = { ...route }
     if (hasPermission(roles, r)) {
@@ -62,8 +61,11 @@ export const filterAsyncRoutes = (routes: AppRouteRecordRaw[], roles: string[]):
   return res
 }
 
-export const asyncJsonRoutes = (routes: RemoteRoute[], basePath = '', allPath: string[] = []): MenuRoute[] => {
-  // 对url地址进行特殊处理
+export const asyncJsonRoutes = (
+  routes: RemoteRoute[],
+  basePath = '',
+  allPath: string[] = []
+): MenuRoute[] => {
   const asyncRouters = routes.map((route: MenuRoute) => {
     if (route.component && isString(route.component)) {
       if (route.component === 'Layout') {
@@ -91,10 +93,21 @@ export const asyncJsonRoutes = (routes: RemoteRoute[], basePath = '', allPath: s
   return asyncRouters
 }
 
+// 开发环境中解决重复加载导致无法正确加载的问题
+let dynamicModules: Recordable<() => Promise<Recordable>>
+
 const loadView = (view: string) => {
+  dynamicModules = dynamicModules ?? import.meta.glob('../../views/**/*.page.{vue,tsx}')
   const viewReg = view.replace('index', 'Index')
-  return modules[`../../views/${viewReg}.page.vue`]
+  return dynamicModules[`../../views/${viewReg}.page.vue`]
 }
+
+/**
+ * 获取全路径
+ * @param route
+ * @param basePath
+ * @returns
+ */
 function getFullPath(route: RemoteRoute, basePath: string): string {
   let path = route.path
   let fullPath: string

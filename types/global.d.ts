@@ -20,3 +20,7 @@ declare interface ViteEnv {
 declare type ReadonlyRecordable<T = any> = {
   readonly [key: string]: T
 }
+
+declare type SimpleType = number | string | boolean | undefined | null
+
+declare type Nullable<T> = T | null
