@@ -27,6 +27,6 @@
 </script>
 
 <template>
-  <Tag v-if="dictItemRef" :color="tagColorTypes[dictItemRef?.showType ?? 'DEFAULT']">{{ dictMapRef.dictLabel }}</Tag>
+  <Tag v-if="dictItemRef" :color="tagColorTypes[dictItemRef?.showType ?? 'DEFAULT']">{{ dictItemRef.dictLabel }}</Tag>
   <Tag v-else :color="tagColorTypes.DANGER">{{ noneLabel ?? '暂无' }}</Tag>
 </template>

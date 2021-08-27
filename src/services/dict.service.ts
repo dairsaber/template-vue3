@@ -1,6 +1,5 @@
 import { DictType } from './../apis/sys/model/dict.model'
 import { getDictByType } from '@/apis/sys/dict.api'
-import { Result } from '#/axios'
 
 const cache: Recordable<Promise<Result<DictType[]>> | DictType[]> = {}
 

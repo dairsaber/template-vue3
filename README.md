@@ -60,3 +60,32 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 ### 使用注意
 
 - vue3 现在仍处于踩坑阶段 尽量少用 tsx jsx 等 这边会出现 一些特性支持不是很完全
+
+### 公用组件说明
+
+#### base-list 封装好了分页 查询功能
+
+#### base-search 封装好了查询操作功能
+
+#### dict-select 字典选择控件
+
+#### dict-tag 字典值显示控件
+
+#### base-icon 整合了 antd 的图标 和 svg 图标 `<base-icon icon="iconName"/>`
+
+#### TODO
+
+- 详情组件
+- 上传组件
+- 基本 Echarts 组件
+- 地图组件
+- 等...
+
+### 数据请求
+
+- 这边前端一般请求的返回体 {code,msg,data} => data 中存储这核心数据
+-
+
+### 关于样式
+
+- 这边集成了 `tailwind.css` 尽量是用它提供的样式类进行页面开发效果展示, 最大程度的样式复用

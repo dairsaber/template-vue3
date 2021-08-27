@@ -12,7 +12,7 @@
 <template>
   <div>
     <slot />
-    <a-space :size="8">
+    <a-space size="small">
       <a-button type="primary" @click="handleSearch">
         <template #icon><base-icon icon="SearchOutlined" /></template>
         搜索

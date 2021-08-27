@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
   import BaseList from '@/components/base-list/BaseList.vue'
   import BaseSearch, { useSearch } from '@/components/base-search'
-
+  import { DictSelect, DictTag } from '@/components/dict'
   import { getUsers } from '@/apis/sys/users.api'
   import { ref } from 'vue'
   import type { UserModel } from '@/apis/sys/model/user.model'
@@ -76,14 +76,21 @@
 <template>
   <div class="space-y-2">
     <a-card>
-      <BaseSearch :params="paramsRef" @search="search" @reset="reset">
-        <a-space :size="8" class="mb-2 mr-2">
+      <base-search :params="paramsRef" @search="search" @reset="reset">
+        <a-space size="small" class="mb-2 mr-2">
           <a-input placeholder="请输入昵称搜索" v-model:value="paramsRef.searchValue" />
+          <dict-select dict="sys_test" style="min-width: 100px" placeholder="请选择" />
         </a-space>
-      </BaseSearch>
+      </base-search>
     </a-card>
 
     <a-card>
+      <a-space size="small">
+        <dict-tag dict="sys_test" value="0" />
+        <dict-tag dict="sys_test" value="1" />
+        <dict-tag dict="sys_test" value="2" />
+        <dict-tag dict="sys_test" value="3" />
+      </a-space>
       <base-list class="mt-4" :params="paramsRef" :columns="columns" :action="getUsers" ref="listRef" :row-key="rowKey" />
     </a-card>
   </div>
