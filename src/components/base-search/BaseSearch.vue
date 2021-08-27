@@ -11,7 +11,7 @@
 
 <template>
   <div>
-    <slot></slot>
+    <slot />
     <a-space :size="8">
       <a-button type="primary" @click="handleSearch">
         <template #icon><base-icon icon="SearchOutlined" /></template>

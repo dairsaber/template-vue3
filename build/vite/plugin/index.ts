@@ -19,7 +19,7 @@ function pathResolve(dir: string) {
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {
-    VITE_USE_IMAGEMIN,
+    // VITE_USE_IMAGEMIN,
     VITE_USE_MOCK,
     VITE_LEGACY,
     VITE_BUILD_COMPRESS,
@@ -53,9 +53,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     //vite-plugin-imagemin 这鬼玩意依赖的包国内不好下载下来
     // VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin())
     // rollup-plugin-gzip
-    vitePlugins.push(
-      configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE)
-    )
+    vitePlugins.push(configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE))
   }
 
   return vitePlugins

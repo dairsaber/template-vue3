@@ -107,7 +107,7 @@
             placeholder="用户名"
           >
             <template #prefix
-              ><base-icon icon="UserOutlined" style="color: rgba(0, 0, 0, 0.25)"
+            ><base-icon icon="UserOutlined" style="color: rgba(0, 0, 0, 0.25)"
             /></template>
           </a-input>
         </a-form-item>
@@ -120,14 +120,14 @@
             size="large"
           >
             <template #prefix
-              ><base-icon icon="LockOutlined" style="color: rgba(0, 0, 0, 0.25)"
+            ><base-icon icon="LockOutlined" style="color: rgba(0, 0, 0, 0.25)"
             /></template>
 
             <template #suffix
-              ><base-icon
-                @click="handleTogglePasswordStatus"
-                :icon="showPassword ? 'EyeOutlined' : 'EyeInvisibleOutlined'"
-                style="color: rgba(0, 0, 0, 0.25)"
+            ><base-icon
+              @click="handleTogglePasswordStatus"
+              :icon="showPassword ? 'EyeOutlined' : 'EyeInvisibleOutlined'"
+              style="color: rgba(0, 0, 0, 0.25)"
             /></template>
           </a-input>
         </a-form-item>
@@ -142,7 +142,7 @@
               <template #prefix> <base-icon icon="all" class="opacity-30" /></template>
             </a-input>
             <div class="float-right w-40 h-10 border-gray-700">
-              <img :src="codeUrl" class="w-full h-full" @click="getSmsCode" />
+              <img :src="codeUrl" class="w-full h-full" @click="getSmsCode">
             </div>
           </div>
         </a-form-item>

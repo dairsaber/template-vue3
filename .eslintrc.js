@@ -15,10 +15,10 @@ module.exports = {
       jsx: true,
     },
   },
-  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', '@vue/typescript/recommended', '@vue/prettier/@typescript-eslint'],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', '@vue/typescript/recommended', '@vue/prettier/@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
-    'no-undef': 'off',
+    // 'no-undef': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     // '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -39,5 +39,12 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 'off',
     'vue/attribute-hyphenation': 'off',
     'vue/require-default-prop': 'off',
+  },
+
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
   },
 }

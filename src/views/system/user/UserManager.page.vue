@@ -79,7 +79,6 @@
       <BaseSearch :params="paramsRef" @search="search" @reset="reset">
         <a-space :size="8" class="mb-2 mr-2">
           <a-input placeholder="请输入昵称搜索" v-model:value="paramsRef.searchValue" />
-          <a-input placeholder="请输入昵称搜索" v-model:value="paramsRef.searchValue" />
         </a-space>
       </BaseSearch>
     </a-card>

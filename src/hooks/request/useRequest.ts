@@ -5,7 +5,7 @@ type ResponseFormat<T> = (result: unknown) => T
 type RequestReturn<T> = {
   result: Ref<UnwrapRef<T>>
   loading: Ref<boolean>
-  search: (params: Recordable) => void
+  requestHandler: (params: Recordable) => void
 }
 
 /**
@@ -20,7 +20,7 @@ export const useRequest = <T>(action: (params: Recordable) => any, params: Recor
   const loading = ref(false)
   const result = ref<T>(defaultValue)
 
-  const search: RequestReturn<T>['search'] = async (params) => {
+  const requestHandler: RequestReturn<T>['requestHandler'] = async (params) => {
     loading.value = true
     try {
       const res = await action(params)
@@ -31,5 +31,5 @@ export const useRequest = <T>(action: (params: Recordable) => any, params: Recor
     loading.value = false
   }
 
-  return { result, loading, search }
+  return { result, loading, requestHandler }
 }

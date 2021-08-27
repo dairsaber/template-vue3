@@ -29,5 +29,5 @@
 </script>
 
 <template>
-  <a-table v-bind="props" :pagination="pagination" :loading="loading" :dataSource="dataSource"></a-table>
+  <a-table v-bind="props" :pagination="pagination" :loading="loading" :dataSource="dataSource" />
 </template>

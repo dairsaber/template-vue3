@@ -35,10 +35,10 @@
 
 <template>
   <Breadcrumb>
-    <a-breadcrumb-item v-for="route in matchedRoutes" :key="route.path">
-      <a type="link" @click="handleGo(route)">
-        <template v-if="route.breadcrumbName === '首页'"><base-icon icon="HomeOutlined" /></template>
-        <span v-else>{{ route.breadcrumbName }}</span>
+    <a-breadcrumb-item v-for="routeItem in matchedRoutes" :key="routeItem.path">
+      <a type="link" @click="handleGo(routeItem)">
+        <template v-if="routeItem.breadcrumbName === '首页'"><base-icon icon="HomeOutlined" /></template>
+        <span v-else>{{ routeItem.breadcrumbName }}</span>
       </a>
     </a-breadcrumb-item>
   </Breadcrumb>
