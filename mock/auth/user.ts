@@ -82,7 +82,7 @@ const login = {
 export default [
   {
     url: '/dev-api/getInfo',
-    timeout: 1000,
+    timeout: 500,
     method: 'get',
     response: () => {
       return resultSuccess(userInfo)
@@ -90,7 +90,7 @@ export default [
   },
   {
     url: '/dev-api/login',
-    timeout: 1000,
+    timeout: 200,
     method: 'post',
     response: (request: requestParams) => {
       const username = request.body.username

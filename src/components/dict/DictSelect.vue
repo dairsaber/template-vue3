@@ -1,0 +1,27 @@
+<script lang="ts" setup>
+  import { DictType } from '@/apis/sys/model/dict.model'
+  import { getDict } from '@/services/dict.service'
+  import { onMounted, ref, useAttrs } from 'vue'
+  import { Select, SelectOption } from 'ant-design-vue'
+  import { colorTypes } from '@/settings/color.conf'
+  type DictSelectProps = {
+    dict: string
+  }
+  const props = defineProps<DictSelectProps>()
+  const dictRef = ref<DictType[]>([])
+
+  onMounted(async () => {
+    // 获取字典
+    dictRef.value = await getDict(props.dict)
+  })
+
+  const attrs = useAttrs()
+</script>
+
+<template>
+  <Select v-bind="attrs">
+    <SelectOption v-for="item in dictRef" :key="item.dictValue" :value="item.dictValue">
+      <span :style="{ color: colorTypes[item.showType] }">{{ item.dictLabel }}</span>
+    </SelectOption>
+  </Select>
+</template>

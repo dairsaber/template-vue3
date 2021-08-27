@@ -1,8 +1,6 @@
 import { request } from '@/utils/http'
 import { LoginParams, LoginResultModel, GetUserInfoModel, GetCaptchaImageModel } from './model/user.model'
 
-import { Result } from '#/axios'
-
 enum Api {
   Login = '/login',
   Logout = '/logout',
@@ -13,7 +11,7 @@ enum Api {
 /**
  * @description: user login api
  */
-export function loginApi(params: LoginParams): Promise<Result<LoginResultModel>> {
+export function loginApi(params: LoginParams): PromiseResult<LoginResultModel> {
   return request.post<Result<LoginResultModel>>({
     url: Api.Login,
     params,
@@ -23,11 +21,11 @@ export function loginApi(params: LoginParams): Promise<Result<LoginResultModel>>
 /**
  * @description: getUserInfo
  */
-export function getUserInfo(): Promise<Result<GetUserInfoModel>> {
+export function getUserInfo(): PromiseResult<GetUserInfoModel> {
   return request.get<Result<GetUserInfoModel>>({ url: Api.GetUserInfo })
 }
 
-export function getCaptchaImage(): Promise<Result<GetCaptchaImageModel>> {
+export function getCaptchaImage(): PromiseResult<GetCaptchaImageModel> {
   return request.get<Result<GetCaptchaImageModel>>({ url: Api.GetCaptchaImage })
 }
 

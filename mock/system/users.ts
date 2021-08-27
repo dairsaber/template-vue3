@@ -103,7 +103,7 @@ const rows = [
 export default [
   {
     url: '/dev-api/system/user/list',
-    timeout: 1000,
+    timeout: 500,
     method: 'get',
     response: ({ query }: requestParams) => {
       const { pageNum, pageSize, searchValue } = query

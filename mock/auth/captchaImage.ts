@@ -18,7 +18,7 @@ const data = [
 export default [
   {
     url: '/dev-api/captchaImage',
-    timeout: 1000,
+    timeout: 100,
     method: 'get',
     response: () => {
       return resultSuccess(data[Math.floor(Math.random() * 2)])

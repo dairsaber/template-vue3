@@ -56,5 +56,9 @@ export default ({ mode, command }: ConfigEnv): UserConfigExport => {
       chunkSizeWarningLimit: 2000,
     },
     plugins: createVitePlugins(viteEnv, isBuild),
+    optimizeDeps: {
+      include: ['ant-design-vue/es/locale/zh_CN', 'moment/dist/locale/zh-cn', 'ant-design-vue/es/locale/en_US', 'moment/dist/locale/eu'],
+      exclude: ['vue-demi'],
+    },
   })
 }
