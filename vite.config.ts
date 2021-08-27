@@ -35,7 +35,6 @@ export default ({ mode, command }: ConfigEnv): UserConfigExport => {
       base: VITE_PUBLIC_PATH,
       host: true,
       port: VITE_PORT ?? 3000,
-      // Load proxy configuration from .env
       proxy: createProxy(VITE_PROXY),
       fs: {
         // 开发环境不需要严格控制
@@ -57,5 +56,9 @@ export default ({ mode, command }: ConfigEnv): UserConfigExport => {
       chunkSizeWarningLimit: 2000,
     },
     plugins: createVitePlugins(viteEnv, isBuild),
+    optimizeDeps: {
+      include: ['ant-design-vue/es/locale/zh_CN', 'moment/dist/locale/zh-cn', 'ant-design-vue/es/locale/en_US', 'moment/dist/locale/eu'],
+      exclude: ['vue-demi'],
+    },
   })
 }

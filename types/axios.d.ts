@@ -23,13 +23,6 @@ export interface RequestOptions {
   withToken?: boolean
 }
 
-export interface Result<T = unknown> {
-  code: number
-  success: boolean
-  msg: string
-  data: T
-}
-
 // multipart/form-data: upload file
 export interface UploadFileParams {
   // Other parameters

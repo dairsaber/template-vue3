@@ -37,7 +37,11 @@ export const useList = (props: ListProps): ListResult => {
     }
   })
 
-  const { search, loading, result } = useRequest<PaginationList>(props.action, toRaw(searchQuery.value), { rows: [], total: 0 }, (result: Result) => {
+  const {
+    requestHandler: search,
+    loading,
+    result,
+  } = useRequest<PaginationList>(props.action, toRaw(searchQuery.value), { rows: [], total: 0 }, (result: Result) => {
     return result.data as PaginationList
   })
 

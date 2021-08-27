@@ -2,9 +2,7 @@ import { ColumnProps } from 'ant-design-vue/lib/table/interface'
 import { Slot, VNode, withModifiers } from 'vue'
 import { Button, Dropdown, Menu, MenuItem } from 'ant-design-vue'
 import BaseIcon from '@/components/base-icon/BaseIcon.vue'
-import { colorTypes } from '@/settings/color.conf'
-
-type OperationTypesKey = keyof typeof colorTypes
+import { colorTypes, ColorType } from '@/settings/color.conf'
 
 export type CustomRenderParams<T> = {
   text: unknown
@@ -16,7 +14,7 @@ export type Operation<T extends Recordable> = {
   icon: string
   title: string | VNode
   action: (record: T) => Promise<void> | void
-  type?: OperationTypesKey
+  type?: ColorType
 }
 
 // 增强了几个常用的 类型
@@ -41,8 +39,8 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
   if (flatParts.length === 0) {
     throw new Error('操作配置需要传 options 不能为空')
   }
-  const getType = (typeKey?: OperationTypesKey) => {
-    const key = (typeKey ?? 'DEFAULT').toLocaleUpperCase() as OperationTypesKey
+  const getType = (typeKey?: ColorType) => {
+    const key = (typeKey ?? 'DEFAULT').toLocaleUpperCase() as ColorType
     return colorTypes[key]
   }
 

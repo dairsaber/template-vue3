@@ -27,6 +27,8 @@ declare module 'vue' {
     BaseIcon: typeof import('./../src/components/base-icon/BaseIcon.vue')['default']
     BaseList: typeof import('./../src/components/base-list/BaseList.vue')['default']
     BaseSearch: typeof import('./../src/components/base-search/BaseSearch.vue')['default']
+    DictSelect: typeof import('./../src/components/dict/DictSelect.vue')['default']
+    DictTag: typeof import('./../src/components/dict/DictTag.vue')['default']
     MyRender: typeof import('./../src/components/my-render/MyRender.vue')['default']
     SvgIcon: typeof import('./../src/components/svg-icon/SvgIcon.vue')['default']
   }
