@@ -2,7 +2,6 @@
   import { DictType } from '@/apis/sys/model/dict.model'
   import { getDictMap } from '@/services/dict.service'
   import { computed, onMounted, ref } from 'vue'
-
   import { tagColorTypes } from '@/settings/color.conf'
 
   type DictTagProps = {

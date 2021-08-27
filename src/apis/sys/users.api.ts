@@ -1,4 +1,3 @@
-import { QueryParams } from './../../@types/request'
 import { UserModel } from './model/user.model'
 import { request } from '@/utils/http'
 

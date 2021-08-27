@@ -1,7 +1,9 @@
+import { cloneDeep } from 'lodash-es'
 import { Ref, toRaw } from 'vue'
 
 export const useSearch = (paramsRef: Ref<Recordable>, listRef: Ref) => {
-  const paramsValues = toRaw(paramsRef.value)
+  const paramsValues = cloneDeep(toRaw(paramsRef.value))
+
   const reset = () => {
     paramsRef.value = { ...paramsValues }
     listRef.value?.search?.()

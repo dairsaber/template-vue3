@@ -1,8 +1,9 @@
+import { isNullOrUnDef } from '@/utils/is'
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosResponse } from 'axios'
-import type { RequestOptions, Result } from '#/axios'
+import type { RequestOptions } from '#/axios'
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { VAxios } from './Axios'
 import { checkStatus } from './checkStatus'
@@ -14,6 +15,7 @@ import { setObjToUrlParams, deepMerge } from '@/utils'
 // import { useErrorLogStoreWithOut } from '@/store/modules/errorLog'
 
 import { joinTimestamp, formatRequestDate } from './helper'
+import { filterNoNull } from '../filter'
 
 const globSetting = useGlobSetting()
 const urlPrefix = globSetting.urlPrefix
@@ -82,7 +84,10 @@ const transform: AxiosTransform = {
           config.params = undefined
         }
         if (joinParamsToUrl) {
-          config.url = setObjToUrlParams(config.url as string, Object.assign({}, config.params, config.data))
+          config.url = setObjToUrlParams(
+            config.url as string,
+            Object.assign({}, config.params, config.data)
+          )
         }
       } else {
         // 兼容restful风格
@@ -97,12 +102,24 @@ const transform: AxiosTransform = {
    * @description: 请求拦截器处理
    */
   requestInterceptors: (config, options) => {
+    const { data, params } = config
+
+    if (!isNullOrUnDef(data)) {
+      config.data = filterNoNull(data)
+    }
+
+    if (!isNullOrUnDef(params)) {
+      config.params = filterNoNull(params)
+    }
+
     // 请求之前处理config
     const token = getToken()
 
     if (token && (config as Recordable<any>)?.requestOptions?.withToken !== false) {
       // jwt token
-      config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token
+      config.headers.Authorization = options.authenticationScheme
+        ? `${options.authenticationScheme} ${token}`
+        : token
     }
     return config
   },

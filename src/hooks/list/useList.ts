@@ -1,6 +1,3 @@
-import { QueryParams } from '@/@types/request'
-import { Result } from '#/axios'
-import { PaginationList } from '@/@types/model/model'
 import { TableState } from 'ant-design-vue/lib/table/interface'
 
 import { computed, reactive, toRaw, onMounted, ComputedRef, Ref } from 'vue'
@@ -41,9 +38,14 @@ export const useList = (props: ListProps): ListResult => {
     requestHandler: search,
     loading,
     result,
-  } = useRequest<PaginationList>(props.action, toRaw(searchQuery.value), { rows: [], total: 0 }, (result: Result) => {
-    return result.data as PaginationList
-  })
+  } = useRequest<PaginationList>(
+    props.action,
+    toRaw(searchQuery.value),
+    { rows: [], total: 0 },
+    (result: Result) => {
+      return result.data as PaginationList
+    }
+  )
 
   onMounted(() => {
     handleSearch()
