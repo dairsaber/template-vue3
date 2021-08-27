@@ -4,13 +4,13 @@
   import { QueryAction, useList } from '@/hooks/list/useList'
   // import { useAttrs } from 'vue'
   import { TableState, TableProps } from 'ant-design-vue/lib/table/interface'
-  import { QueryParams } from '@/@types/request'
 
   // 这边是 antd的一个bug 类型声明中 columns 类型声明错误 所以在此重新声明一下
   // FIXME vue3 现在对复杂的类型推断 为props类型是不支持的 等待以后的解决 https://github.com/vuejs/vue-next/issues/4294
   // export type ListProps & Omit<TableProps, 'dataSource' | 'pagination' | 'columns'> &  { columns: TableState['columns']}
 
-  export interface BaseListProps extends Omit<TableProps, 'dataSource' | 'pagination' | 'loading' | 'columns'> {
+  export interface BaseListProps
+    extends Omit<TableProps, 'dataSource' | 'pagination' | 'loading' | 'columns'> {
     columns: TableState['columns']
     params?: QueryParams
     action: QueryAction

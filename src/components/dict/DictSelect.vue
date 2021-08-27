@@ -2,7 +2,6 @@
   import { DictType } from '@/apis/sys/model/dict.model'
   import { getDict } from '@/services/dict.service'
   import { onMounted, ref, useAttrs } from 'vue'
-  import { Select, SelectOption } from 'ant-design-vue'
   import { colorTypes } from '@/settings/color.conf'
   type DictSelectProps = {
     dict: string
@@ -19,9 +18,9 @@
 </script>
 
 <template>
-  <Select v-bind="attrs">
-    <SelectOption v-for="item in dictRef" :key="item.dictValue" :value="item.dictValue">
+  <a-select v-bind="attrs">
+    <a-select-option v-for="item in dictRef" :key="item.dictValue" :value="item.dictValue">
       <span :style="{ color: colorTypes[item.showType] }">{{ item.dictLabel }}</span>
-    </SelectOption>
-  </Select>
+    </a-select-option>
+  </a-select>
 </template>

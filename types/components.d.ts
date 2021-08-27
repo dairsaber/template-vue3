@@ -4,6 +4,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AAvatar: typeof import('ant-design-vue/es')['Avatar']
+    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
     ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACard: typeof import('ant-design-vue/es')['Card']
@@ -19,6 +20,8 @@ declare module 'vue' {
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     AppProvider: typeof import('./../src/components/app-provider/AppProvider.vue')['default']
+    ASelect: typeof import('ant-design-vue/es')['Select']
+    ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
     ASpace: typeof import('ant-design-vue/es')['Space']
     ATable: typeof import('ant-design-vue/es')['Table']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']

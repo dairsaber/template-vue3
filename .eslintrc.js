@@ -15,7 +15,11 @@ module.exports = {
       jsx: true,
     },
   },
-  extends: ['plugin:vue/vue3-recommended', '@vue/typescript/recommended', '@vue/prettier/@typescript-eslint'],
+  extends: [
+    'plugin:vue/vue3-recommended',
+    '@vue/typescript/recommended',
+    '@vue/prettier/@typescript-eslint',
+  ],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     // 'no-undef': 'off',

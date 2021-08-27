@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios'
-import type { RequestOptions, Result, UploadFileParams } from '#/axios'
+import type { RequestOptions, UploadFileParams } from '#/axios'
 import type { CreateAxiosOptions } from './axiosTransform'
 import axios from 'axios'
 import qs from 'qs'
@@ -68,7 +68,12 @@ export class VAxios {
     if (!transform) {
       return
     }
-    const { requestInterceptors, requestInterceptorsCatch, responseInterceptors, responseInterceptorsCatch } = transform
+    const {
+      requestInterceptors,
+      requestInterceptorsCatch,
+      responseInterceptors,
+      responseInterceptorsCatch,
+    } = transform
 
     const axiosCanceler = new AxiosCanceler()
 
@@ -79,7 +84,10 @@ export class VAxios {
         headers: { ignoreCancelToken },
       } = config
 
-      const ignoreCancel = ignoreCancelToken !== undefined ? ignoreCancelToken : this.options.requestOptions?.ignoreCancelToken
+      const ignoreCancel =
+        ignoreCancelToken !== undefined
+          ? ignoreCancelToken
+          : this.options.requestOptions?.ignoreCancelToken
 
       !ignoreCancel && axiosCanceler.addPending(config)
       if (requestInterceptors && isFunction(requestInterceptors)) {
@@ -89,7 +97,9 @@ export class VAxios {
     }, undefined)
 
     // Request interceptor error capture
-    requestInterceptorsCatch && isFunction(requestInterceptorsCatch) && this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch)
+    requestInterceptorsCatch &&
+      isFunction(requestInterceptorsCatch) &&
+      this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch)
 
     // Response result interceptor processing
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<unknown>) => {
@@ -101,13 +111,18 @@ export class VAxios {
     }, undefined)
 
     // Response result interceptor error capture
-    responseInterceptorsCatch && isFunction(responseInterceptorsCatch) && this.axiosInstance.interceptors.response.use(undefined, responseInterceptorsCatch)
+    responseInterceptorsCatch &&
+      isFunction(responseInterceptorsCatch) &&
+      this.axiosInstance.interceptors.response.use(undefined, responseInterceptorsCatch)
   }
 
   /**
    * @description:  File Upload
    */
-  uploadFile<T = unknown>(config: AxiosRequestConfig, params: UploadFileParams): Promise<AxiosResponse<T>> | Promise<null> {
+  uploadFile<T = unknown>(
+    config: AxiosRequestConfig,
+    params: UploadFileParams
+  ): Promise<AxiosResponse<T>> | Promise<null> {
     const formData = new window.FormData()
 
     if (params.data) {
@@ -147,7 +162,11 @@ export class VAxios {
     const headers = config.headers || this.options.headers
     const contentType = headers?.['Content-Type'] || headers?.['content-type']
 
-    if (contentType !== ContentTypeEnum.FORM_URLENCODED || !Reflect.has(config, 'data') || config.method?.toUpperCase() === RequestEnum.GET) {
+    if (
+      contentType !== ContentTypeEnum.FORM_URLENCODED ||
+      !Reflect.has(config, 'data') ||
+      config.method?.toUpperCase() === RequestEnum.GET
+    ) {
       return config
     }
 

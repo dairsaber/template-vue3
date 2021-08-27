@@ -1,4 +1,4 @@
-import { AppRouteRecordRaw, Component } from '@/@types/route/route'
+import { AppRouteRecordRaw, Component } from '#/vue-route'
 
 export interface RemoteRoute extends AppRouteRecordRaw {
   id: number

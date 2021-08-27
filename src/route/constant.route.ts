@@ -1,5 +1,5 @@
+import { AppRouteRecordRaw } from '#/vue-route'
 import { RouteRecordRaw } from 'vue-router'
-import { AppRouteRecordRaw } from '@/@types/route/route'
 
 // 本地路由配置
 const constantRoutes: AppRouteRecordRaw[] = [
