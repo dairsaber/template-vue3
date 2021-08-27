@@ -2,7 +2,7 @@
   import { DictType } from '@/apis/sys/model/dict.model'
   import { getDictMap } from '@/services/dict.service'
   import { computed, onMounted, ref } from 'vue'
-  import { Tag } from 'ant-design-vue'
+
   import { tagColorTypes } from '@/settings/color.conf'
 
   type DictTagProps = {
@@ -27,6 +27,6 @@
 </script>
 
 <template>
-  <Tag v-if="dictItemRef" :color="tagColorTypes[dictItemRef?.showType ?? 'DEFAULT']">{{ dictItemRef.dictLabel }}</Tag>
-  <Tag v-else :color="tagColorTypes.DANGER">{{ noneLabel ?? '暂无' }}</Tag>
+  <a-tag v-if="dictItemRef" :color="tagColorTypes[dictItemRef?.showType ?? 'DEFAULT']">{{ dictItemRef.dictLabel }}</a-tag>
+  <a-tag v-else :color="tagColorTypes.DANGER">{{ noneLabel ?? '暂无' }}</a-tag>
 </template>
