@@ -15,11 +15,7 @@ module.exports = {
       jsx: true,
     },
   },
-  extends: [
-    'plugin:vue/vue3-recommended',
-    '@vue/typescript/recommended',
-    '@vue/prettier/@typescript-eslint',
-  ],
+  extends: ['plugin:vue/vue3-recommended', '@vue/typescript/recommended', '@vue/prettier/@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     // 'no-undef': 'off',
@@ -34,6 +30,7 @@ module.exports = {
     // '@typescript-eslint/ban-ts-comment': 'off',
     // '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'vue/html-self-closing': 0,
     'space-before-function-paren': 'off',
     'vue/attributes-order': 'off',
     'vue/one-component-per-file': 'off',
