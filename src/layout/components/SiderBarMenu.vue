@@ -47,9 +47,9 @@
           router.push(key)
         }
       }
-      // 绑定了openkey之后只能手动实现 只展开单个
       const handleOpenChange = (openKeys: string[]) => {
         if (props.multiple) return
+        // 绑定了openkey之后只能手动实现 只展开单个
         const key = openKeys.pop()
         setOpenKey(key, true)
       }

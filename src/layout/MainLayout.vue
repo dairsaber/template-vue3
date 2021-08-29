@@ -9,29 +9,17 @@
 <template>
   <a-layout class="w-screen h-screen">
     <!-- left-side -->
-    <a-layout-sider
-      v-model:collapsed="collapsed"
-      breakpoint="lg"
-      class="top-0 left-0 h-screen overflow-auto"
-      style="position: fixed"
-      :trigger="null"
-      collapsible
-    >
+    <a-layout-sider v-model:collapsed="collapsed" breakpoint="lg" class="top-0 left-0 h-screen overflow-auto" style="position: fixed" :trigger="null" collapsible>
       <div class="logo" />
       <!-- menu -->
-      <SiderBarMenu theme="dark" :multiple="true" />
+      <SiderBarMenu theme="dark" :multiple="false" />
     </a-layout-sider>
     <a-layout :style="{ marginLeft: collapsed ? '80px' : '200px' }" class="main-layout">
       <!-- header -->
       <a-layout-header class="layout-header">
         <div class="flex justify-between">
           <div class="space-x-4">
-            <a-button
-              type="ghost"
-              shape="circle"
-              class="inline-block text-xl"
-              @click="() => (collapsed = !collapsed)"
-            >
+            <a-button type="ghost" shape="circle" class="inline-block text-xl" @click="() => (collapsed = !collapsed)">
               <base-icon :icon="collapsed ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'" />
             </a-button>
             <Breadcrumb class="inline-block" />

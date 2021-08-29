@@ -37,7 +37,7 @@ const data = [
   {
     name: 'Monitor',
     path: '/monitor',
-    hidden: true,
+    hidden: false,
     redirect: 'noRedirect',
     component: 'Layout',
     alwaysShow: true,
