@@ -1,46 +1,17 @@
 <script lang="tsx" setup>
-  import BaseList from '@/components/base-list/BaseList.vue'
-  import BaseSearch, { useSearch } from '@/components/base-search'
-  import { DictSelect, DictTag } from '@/components/dict'
+  import { useSearch } from '@/components/base-search'
   import { getUsers } from '@/apis/sys/users.api'
-  import { ref } from 'vue'
+  import { ref, watchEffect } from 'vue'
   import type { UserModel } from '@/apis/sys/model/user.model'
-  import { defineColumns, getOperation } from '@/utils/component/table.utils'
+  import { defineColumns } from '@/utils/component/table.utils'
+  import { useUserListOperation } from './hook/useUserListOperation'
 
-  const operationColumn = getOperation<UserModel>([
-    {
-      title: '审核',
-      icon: 'all',
-      action: (record) => {
-        console.log(`record`, record)
-      },
-    },
-    {
-      title: '修改',
-      icon: 'EditOutlined',
-      type: 'WARN',
-      action: (record) => {
-        console.log(`record`, record)
-      },
-    },
-    {
-      title: '删除',
-      icon: 'DeleteOutlined',
-      type: 'DANGER',
-      action: (record) => {
-        console.log(`record`, record)
-      },
-    },
+  const { operationColumn, detailRef } = useUserListOperation()
 
-    {
-      title: '详情',
-      icon: 'all',
-      type: 'INFO',
-      action: (record) => {
-        console.log(`record`, record)
-      },
-    },
-  ])
+  watchEffect(() => {
+    console.log(`visible`, detailRef.value.visible)
+    console.log('record', detailRef.value.data)
+  })
 
   const columns = defineColumns<UserModel>([
     {

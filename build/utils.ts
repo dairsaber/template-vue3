@@ -1,7 +1,7 @@
 // Read all environment variable configuration files to process.env
 export type RealNameType = string | number | boolean
 
-export function wrapperEnv(envConf: Dictable<string | boolean>): ViteEnv {
+export function wrapperEnv(envConf: Recordable<string | boolean>): ViteEnv {
   const ret: Recordable<RealNameType> = {}
 
   for (const envName of Object.keys(envConf)) {

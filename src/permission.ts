@@ -1,12 +1,13 @@
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { message } from 'ant-design-vue'
 
+import { message } from '@/utils/component/message.util'
 import router, { whiteList } from '@/route'
 import { RouteLocationNormalized } from 'vue-router'
 import { usePermissionStore } from '@/store/modules/permission.store'
 import { useUserStore } from '@/store/modules/user.store'
 import { isUrl } from '@/utils/is'
+
 import { toRaw } from 'vue'
 
 NProgress.configure({ showSpinner: false })

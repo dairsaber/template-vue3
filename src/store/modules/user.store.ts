@@ -5,7 +5,8 @@ import { setToken } from '@/utils/cookies'
 import { LoginParams } from '@/apis/sys/model/user.model'
 import { getUserInfo, loginApi } from '@/apis/sys/user.api'
 import { defineStore } from 'pinia'
-import { message } from 'ant-design-vue'
+import { message } from '@/utils/component/message.util'
+
 import { resetRouter } from '@/route'
 
 export type UserState = {

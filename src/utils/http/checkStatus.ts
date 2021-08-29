@@ -2,7 +2,7 @@ import type { ErrorMessageMode } from '#/axios'
 
 import projectSetting from '@/settings/project.conf'
 import { SessionTimeoutProcessingEnum } from '@/enums/app.enum'
-import { message } from 'ant-design-vue'
+import { message } from '@/utils/component/message.util'
 
 const stp = projectSetting.sessionTimeoutProcessing
 

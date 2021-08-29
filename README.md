@@ -63,20 +63,22 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 
 ### 公用组件说明
 
-#### base-list 封装好了分页 查询功能
+#### base-list 封装好了分页 查询功能 （已注册全局）
 
-#### base-search 封装好了查询操作功能
+#### base-search 封装好了查询操作功能 （已注册全局）
 
-#### dict-select 字典选择控件
+#### dict-select 字典选择控件 （已注册全局）
 
-#### dict-tag 字典值显示控件
+#### dict-tag 字典值显示控件 （已注册全局）
 
-#### base-icon 整合了 antd 的图标 和 svg 图标 `<base-icon icon="iconName"/>`
+#### base-icon 整合了 antd 的图标 和 svg 图标 `<base-icon icon="iconName"/>` （已注册全局）
 
 #### TODO
 
 - 详情组件
 - 上传组件
+- 附件组件
+- 预览组件
 - 基本 Echarts 组件
 - 地图组件
 - 等...
