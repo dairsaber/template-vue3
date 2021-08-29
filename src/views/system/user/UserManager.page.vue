@@ -3,7 +3,7 @@
   import { getUsers } from '@/apis/sys/users.api'
   import { ref, watchEffect } from 'vue'
   import type { UserModel } from '@/apis/sys/model/user.model'
-  import { defineColumns } from '@/utils/component/table.utils'
+  import { defineColumns, renderGoTo } from '@/utils/component/table.utils'
   import { useUserListOperation } from './hook/useUserListOperation'
 
   const { operationColumn, detailRef } = useUserListOperation()
@@ -18,6 +18,7 @@
       dataIndex: 'nickName',
       title: '昵称',
       key: 'nickName',
+      customRender: ({ record }) => renderGoTo(record.nickName, '/icons'),
     },
     {
       dataIndex: 'phonenumber',

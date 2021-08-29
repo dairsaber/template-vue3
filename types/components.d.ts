@@ -32,6 +32,7 @@ declare module 'vue' {
     BaseSearch: typeof import('./../src/components/base-search/BaseSearch.vue')['default']
     DictSelect: typeof import('./../src/components/dict/DictSelect.vue')['default']
     DictTag: typeof import('./../src/components/dict/DictTag.vue')['default']
+    GoTo: typeof import('./../src/components/go-to/GoTo.vue')['default']
     MyRender: typeof import('./../src/components/my-render/MyRender.vue')['default']
     SvgIcon: typeof import('./../src/components/svg-icon/SvgIcon.vue')['default']
   }

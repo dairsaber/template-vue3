@@ -3,6 +3,8 @@ import { Slot, toRaw, VNode, withModifiers } from 'vue'
 import { Button, Dropdown, Menu, MenuItem } from 'ant-design-vue'
 import BaseIcon from '@/components/base-icon/BaseIcon.vue'
 import { colorTypes, ColorType } from '@/settings/color.conf'
+import { RouteLocationRaw } from 'vue-router'
+import GoTo from '@/components/go-to/GoTo.vue'
 
 export type CustomRenderParams<T> = {
   text: unknown
@@ -23,9 +25,7 @@ export type EnhanceColumnProps<T extends Recordable> = Omit<ColumnProps, 'custom
   dataIndex: keyof T
 }
 
-export const defineColumns = <T extends Recordable>(
-  columns: EnhanceColumnProps<T>[]
-): EnhanceColumnProps<T>[] => {
+export const defineColumns = <T extends Recordable>(columns: EnhanceColumnProps<T>[]): EnhanceColumnProps<T>[] => {
   return columns
 }
 
@@ -35,10 +35,7 @@ export const defineColumns = <T extends Recordable>(
  * @param splitNumber 分割位置 从第二个操作分割还是什么的
  * @returns {CustomRenderParams}
  */
-export const getOperation = <T extends Recordable>(
-  options: Operation<T>[],
-  splitNumber = 2
-): EnhanceColumnProps<T> => {
+export const getOperation = <T extends Recordable>(options: Operation<T>[], splitNumber = 2): EnhanceColumnProps<T> => {
   const flatParts = options.slice(0, splitNumber)
   const mixParts = options.slice(splitNumber)
   if (flatParts.length === 0) {
@@ -115,3 +112,5 @@ export const getOperation = <T extends Recordable>(
     },
   }
 }
+
+export const renderGoTo = (text: string, to: RouteLocationRaw) => <GoTo to={to}>{text}</GoTo>
