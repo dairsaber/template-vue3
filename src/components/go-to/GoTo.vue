@@ -28,7 +28,7 @@
 </script>
 
 <template>
-  <a @click.self="handleGoTo"><slot /></a>
+  <a @click.stop="handleGoTo"><slot /></a>
 </template>
 
 <style lang="scss" scoped></style>

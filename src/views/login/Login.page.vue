@@ -74,6 +74,8 @@
       })
     } catch (error) {
       console.error(`error`, error)
+    } finally {
+      loadingRef.value = false
     }
     // loadingRef.value = false
   }

@@ -3,6 +3,7 @@
   import SiderBarMenu from './components/SiderBarMenu.vue'
   import Breadcrumb from './components/Breadcrumb.vue'
   import UserDropdown from './components/UserDropdown.vue'
+  import Notification from './components/Notification.vue'
   const collapsed = ref<boolean>(false)
 </script>
 
@@ -24,7 +25,10 @@
             </a-button>
             <Breadcrumb class="inline-block" />
           </div>
-          <UserDropdown />
+          <div class="flex items-center">
+            <Notification />
+            <UserDropdown class="ml-2" />
+          </div>
         </div>
       </a-layout-header>
       <!-- content -->

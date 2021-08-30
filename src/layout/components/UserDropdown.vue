@@ -33,14 +33,10 @@
     <template #overlay>
       <a-menu>
         <a-menu-item>
-          <a @click.self="handleMenuClick(ActionKey.USER_CENTER)">
-            <base-icon icon="UserOutlined" /> 个人中心</a
-          >
+          <a @click.stop="handleMenuClick(ActionKey.USER_CENTER)"> <base-icon icon="UserOutlined" /> 个人中心</a>
         </a-menu-item>
         <a-menu-item>
-          <a @click.self="handleMenuClick(ActionKey.LOGOUT)">
-            <base-icon icon="LogoutOutlined" /> 退出</a
-          >
+          <a @click.stop="handleMenuClick(ActionKey.LOGOUT)"> <base-icon icon="LogoutOutlined" /> 退出</a>
         </a-menu-item>
       </a-menu>
     </template>
