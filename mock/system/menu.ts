@@ -7,10 +7,10 @@ const data = [
     path: '/task',
     redirect: '/task/wait',
     component: 'Layout',
-    meta: { title: '事项管理', icon: 'system', noCache: false, link: null },
+    meta: { title: '事项管理', icon: 'svg-notification', noCache: false, link: null },
     children: [
-      { name: 'TaskWait', path: 'wait', component: 'biz/task/TaskWait', meta: { title: '待办事项', icon: 'user', noCache: false, link: null } },
-      { name: 'TaskComplete', path: 'complete', component: 'biz/task/TaskComplete', meta: { title: '已办事项', icon: 'user', noCache: false, link: null } },
+      { name: 'TaskWait', path: 'wait', component: 'biz/task/TaskWait', meta: { title: '待办事项', icon: 'svg-notification', noCache: false, link: null } },
+      { name: 'TaskComplete', path: 'complete', component: 'biz/task/TaskComplete', meta: { title: '已办事项', icon: 'svg-notification', noCache: false, link: null } },
     ],
   },
   {
@@ -18,27 +18,28 @@ const data = [
     path: '/apply',
     redirect: '/apply/plan',
     component: 'Layout',
-    meta: { title: '申报管理', icon: 'system', noCache: false, link: null },
+    meta: { title: '申报管理', icon: 'SolutionOutlined', noCache: false, link: null },
     children: [
-      { name: 'ApplyPlan', path: 'plan', component: 'biz/apply/ApplyPlan', meta: { title: '计划申报', icon: 'user', noCache: false, link: null } },
-      { name: 'ApplyCheck', path: 'check', component: 'biz/apply/ApplyCheck', meta: { title: '计划审核', icon: 'user', noCache: false, link: null } },
+      { name: 'ApplyPlan', path: 'plan', component: 'biz/apply/ApplyPlan', meta: { title: '计划申报', icon: 'SolutionOutlined', noCache: false, link: null } },
+      { name: 'ApplyCheck', path: 'check', component: 'biz/apply/ApplyCheck', meta: { title: '申报审核', icon: 'SolutionOutlined', noCache: false, link: null } },
     ],
   },
+
   {
-    name: 'Object',
-    path: '/object',
-    redirect: '/object/manager',
+    name: 'repository',
+    path: '/repository',
+    redirect: '/repository/manager',
     component: 'Layout',
-    meta: { title: '物料管理', icon: 'system', noCache: false, link: null },
+    meta: { title: '仓库管理', icon: 'GroupOutlined', noCache: false, link: null },
     children: [
-      { name: 'ObjectManager', path: 'manager', component: 'biz/object/ObjectManager', meta: { title: '物料登记', icon: 'user', noCache: false, link: null } },
-      { name: 'ObjectIn', path: 'in', component: 'biz/object/ObjectIn', meta: { title: '物料入库', icon: 'user', noCache: false, link: null } },
-      { name: 'ObjectCheck', path: 'check', component: 'biz/object/ObjectCheck', meta: { title: '入库复核', icon: 'user', noCache: false, link: null } },
-      { name: 'ObjectOut', path: 'out', component: 'biz/object/ObjectOut', meta: { title: '物料出库', icon: 'user', noCache: false, link: null } },
-      { name: 'ObjectMove', path: 'move', component: 'biz/object/ObjectMove', meta: { title: '物料转移', icon: 'user', noCache: false, link: null } },
-      { name: 'ObjectApply', path: 'apply', component: 'biz/object/ObjectApply', meta: { title: '物料申领', icon: 'user', noCache: false, link: null } },
-      { name: 'ObjectBack', path: 'back', component: 'biz/object/ObjectBack', meta: { title: '物料申退', icon: 'user', noCache: false, link: null } },
-      { name: 'ObjectStatistic', path: 'statistic', component: 'biz/object/ObjectStatistic', meta: { title: '物料统计', icon: 'user', noCache: false, link: null } },
+      { name: 'RepositoryManager', path: 'manager', component: 'biz/repository/RepositoryManager', meta: { title: '仓库管理', icon: 'GroupOutlined', noCache: false, link: null } },
+      { name: 'RepositoryIn', path: 'in', component: 'biz/repository/RepositoryIn', meta: { title: '物料入库', icon: 'ImportOutlined', noCache: false, link: null } },
+      { name: 'RepositoryCheck', path: 'check', component: 'biz/repository/RepositoryCheck', meta: { title: '入库复核', icon: 'FileSearchOutlined', noCache: false, link: null } },
+      { name: 'RepositoryOut', path: 'out', component: 'biz/repository/RepositoryOut', meta: { title: '物料出库', icon: 'ExportOutlined', noCache: false, link: null } },
+      { name: 'RepositoryMove', path: 'move', component: 'biz/repository/RepositoryMove', meta: { title: '物料转移', icon: 'MergeCellsOutlined', noCache: false, link: null } },
+      { name: 'RepositoryApply', path: 'apply', component: 'biz/repository/RepositoryApply', meta: { title: '物料申领', icon: 'SolutionOutlined', noCache: false, link: null } },
+      { name: 'RepositoryBack', path: 'back', component: 'biz/repository/RepositoryBack', meta: { title: '物料申退', icon: 'LogoutOutlined', noCache: false, link: null } },
+      { name: 'RepositoryInventory', path: 'inventory', component: 'biz/repository/RepositoryInventory', meta: { title: '仓库盘点', icon: 'DotChartOutlined', noCache: false, link: null } },
     ],
   },
   {
@@ -46,11 +47,31 @@ const data = [
     path: '/ledger',
     redirect: '/ledger/in',
     component: 'Layout',
-    meta: { title: '台账管理', icon: 'system', noCache: false, link: null },
+    meta: { title: '台账管理', icon: 'ProfileOutlined', noCache: false, link: null },
     children: [
-      { name: 'LedgerIn', path: 'in', component: 'biz/object/LedgerIn', meta: { title: '入库台账', icon: 'user', noCache: false, link: null } },
-
-      // TODO
+      { name: 'LedgerIn', path: 'in', component: 'biz/object/LedgerIn', meta: { title: '入库台账', icon: 'PayCircleOutlined', noCache: false, link: null } },
+      { name: 'LedgerOut', path: 'out', component: 'biz/object/LedgerOut', meta: { title: '出库台账', icon: 'PayCircleOutlined', noCache: false, link: null } },
+      { name: 'LedgerStock', path: 'stock', component: 'biz/object/LedgerStock', meta: { title: '库存台账', icon: 'ReconciliationOutlined', noCache: false, link: null } },
+      { name: 'LedgerInventory', path: 'inventory', component: 'biz/object/LedgerInventory', meta: { title: '盘点台账', icon: 'InsertRowBelowOutlined', noCache: false, link: null } },
+    ],
+  },
+  {
+    name: 'statistic',
+    path: '/statistic',
+    redirect: '/statistic/repository',
+    component: 'Layout',
+    meta: { title: '统计信息', icon: 'AreaChartOutlined', noCache: false, link: null },
+    children: [{ name: 'RepositoryStatistic', path: 'repository', component: 'biz/statistic/StatisticRepository', meta: { title: '物料统计', icon: 'AreaChartOutlined', noCache: false, link: null } }],
+  },
+  {
+    name: 'Object',
+    path: '/object',
+    redirect: '/object/manager',
+    component: 'Layout',
+    meta: { title: '物料管理', icon: 'InsertRowRightOutlined', noCache: false, link: null },
+    children: [
+      { name: 'ObjectManager', path: 'manager', component: 'biz/object/ObjectManager', meta: { title: '物料登记', icon: 'ReconciliationOutlined', noCache: false, link: null } },
+      { name: 'ObjectMarker', path: 'maker', component: 'biz/object/ObjectMarker', meta: { title: '物料品牌', icon: 'WalletOutlined', noCache: false, link: null } },
     ],
   },
   {
@@ -84,37 +105,6 @@ const data = [
       },
     ],
   },
-  {
-    name: 'Monitor',
-    path: '/monitor',
-    hidden: false,
-    redirect: 'noRedirect',
-    component: 'Layout',
-
-    meta: { title: '系统监控', icon: 'monitor', noCache: false, link: null },
-    children: [
-      { name: 'Online', path: 'online', hidden: false, component: 'monitor/online/index', meta: { title: '在线用户', icon: 'online', noCache: false, link: null } },
-      { name: 'Job', path: 'job', hidden: false, component: 'monitor/job/index', meta: { title: '定时任务', icon: 'job', noCache: false, link: null } },
-      { name: 'Druid', path: 'druid', hidden: false, component: 'monitor/druid/index', meta: { title: '数据监控', icon: 'druid', noCache: false, link: null } },
-      { name: 'Server', path: 'server', hidden: false, component: 'monitor/server/index', meta: { title: '服务监控', icon: 'server', noCache: false, link: null } },
-      { name: 'Cache', path: 'cache', hidden: false, component: 'monitor/cache/index', meta: { title: '缓存监控', icon: 'redis', noCache: false, link: null } },
-    ],
-  },
-  {
-    name: 'Tool',
-    path: '/tool',
-    hidden: true,
-    redirect: 'noRedirect',
-    component: 'Layout',
-
-    meta: { title: '系统工具', icon: 'tool', noCache: false, link: null },
-    children: [
-      { name: 'Build', path: 'build', hidden: false, component: 'tool/build/index', meta: { title: '表单构建', icon: 'build', noCache: false, link: null } },
-      { name: 'Gen', path: 'gen', hidden: false, component: 'tool/gen/index', meta: { title: '代码生成', icon: 'code', noCache: false, link: null } },
-      { name: 'Swagger', path: 'swagger', hidden: false, component: 'tool/swagger/index', meta: { title: '系统接口', icon: 'swagger', noCache: false, link: null } },
-    ],
-  },
-  { name: 'Http://ruoyi.vip', path: 'http://ruoyi.vip', hidden: true, component: 'Layout', meta: { title: '若依官网', icon: 'guide', noCache: false, link: 'http://ruoyi.vip' } },
 ]
 
 export default [

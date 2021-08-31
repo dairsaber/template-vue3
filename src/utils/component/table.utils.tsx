@@ -1,13 +1,13 @@
 import { ColumnProps } from 'ant-design-vue/lib/table/interface'
 import { Slot, toRaw, VNode, withModifiers } from 'vue'
-import { Button, Dropdown, Menu, MenuItem, TypographyParagraph, TypographyText } from 'ant-design-vue'
+import { Button, Dropdown, Menu, MenuItem, TypographyParagraph } from 'ant-design-vue'
 import BaseIcon from '@/components/base-icon/BaseIcon.vue'
 import { colorTypes, ColorType } from '@/settings/color.conf'
 import { RouteLocationRaw } from 'vue-router'
 import GoTo from '@/components/go-to/GoTo.vue'
 
-export type CustomRenderParams<T> = {
-  text: unknown
+export type CustomRenderParams<T extends Recordable = Recordable> = {
+  text: string
   record: T
   index: number
 }
@@ -114,7 +114,7 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
   }
 }
 
-export const renderGoTo = (text: string, to: RouteLocationRaw) => <GoTo to={to}>{text}</GoTo>
+export const renderGoTo = (text: string | VNode, to: RouteLocationRaw) => <GoTo to={to}>{text}</GoTo>
 
 /**
  * 渲染长文本
@@ -123,7 +123,7 @@ export const renderGoTo = (text: string, to: RouteLocationRaw) => <GoTo to={to}>
  */
 export const renderLongText =
   (rows: number) =>
-  ({ text }: { text?: string }) => {
+  ({ text }: CustomRenderParams): VNode | string => {
     return text ? <TypographyParagraph ellipsis={{ rows, expandable: true }} content={text} /> : ''
   }
 
@@ -132,6 +132,6 @@ export const renderLongText =
  * @param param0
  * @returns
  */
-export const renderCopyText = ({ text }: { text?: string }) => {
+export const renderCopyText = ({ text }: CustomRenderParams): VNode | string => {
   return text ? <TypographyParagraph copyable>{text}</TypographyParagraph> : ''
 }

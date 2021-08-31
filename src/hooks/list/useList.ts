@@ -38,14 +38,9 @@ export const useList = (props: ListProps): ListResult => {
     requestHandler: search,
     loading,
     result,
-  } = useRequest<PaginationList>(
-    props.action,
-    toRaw(searchQuery.value),
-    { rows: [], total: 0 },
-    (result: Result) => {
-      return result.data as PaginationList
-    }
-  )
+  } = useRequest<PaginationList>(props.action, toRaw(searchQuery.value), { rows: [], total: 0 }, (result: Result) => {
+    return result.data as PaginationList
+  })
 
   onMounted(() => {
     handleSearch()
@@ -65,6 +60,7 @@ export const useList = (props: ListProps): ListResult => {
       total: result.value.total,
       pageSizeOptions: config.defaultPageSizeOptions,
       showSizeChanger: true,
+      showTotal: config.showTotal,
       onChange: handlePaginationChange,
       onShowSizeChange: handlePaginationChange,
     }

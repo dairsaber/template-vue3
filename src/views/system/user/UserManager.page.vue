@@ -48,7 +48,7 @@
 <template>
   <div class="space-y-2">
     <a-card>
-      <base-search :params="paramsRef" @search="search" @reset="reset">
+      <base-search @search="search" @reset="reset">
         <a-space size="small" class="mb-2 mr-2">
           <a-input placeholder="请输入昵称搜索" v-model:value="paramsRef.searchValue" />
           <dict-select dict="sys_test" style="min-width: 100px" placeholder="请选择" v-model:value="paramsRef.status" />
