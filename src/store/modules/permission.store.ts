@@ -34,7 +34,7 @@ export const usePermissionStore = defineStore({
       const routes = menus.concat(constantRoutes as RemoteRoute[])
       const userStore = useUserStore()
       const filterRoutes = filterAsyncRoutes(routes, userStore.roles)
-      this.routes = asyncJsonRoutes(filterRoutes)
+      this.routes = generateAsyncRoutes(filterRoutes)
       return this.routes
     },
   },
@@ -61,11 +61,7 @@ export const filterAsyncRoutes = (routes: RemoteRoute[], roles: string[]): Remot
   return res
 }
 
-export const asyncJsonRoutes = (
-  routes: RemoteRoute[],
-  basePath = '',
-  allPath: string[] = []
-): MenuRoute[] => {
+export const generateAsyncRoutes = (routes: RemoteRoute[], basePath = '', allPath: string[] = []): MenuRoute[] => {
   const asyncRouters = routes.map((route: MenuRoute) => {
     if (route.component && isString(route.component)) {
       if (route.component === 'Layout') {
@@ -85,7 +81,7 @@ export const asyncJsonRoutes = (
     route.allPath = currentAllPath
     // 如果有子路由，递归添加
     if (route.children && route.children.length) {
-      asyncJsonRoutes(route.children, fullPath, currentAllPath)
+      generateAsyncRoutes(route.children, fullPath, currentAllPath)
     }
 
     return route
@@ -97,9 +93,17 @@ export const asyncJsonRoutes = (
 let dynamicModules: Recordable<() => Promise<Recordable>>
 
 const loadView = (view: string) => {
-  dynamicModules = dynamicModules ?? import.meta.glob('../../views/**/*.page.{vue,tsx}')
+  const tempModules = dynamicModules ?? import.meta.glob('../../views/**/*.page.{vue,tsx}')
+  // 处理一下 module的 key
+  if (!dynamicModules) {
+    dynamicModules = Object.keys(tempModules).reduce((prev, current) => {
+      const currentKey = current.replace(/(\.vue)|(\.tsx)$/, '')
+      prev[currentKey] = tempModules[current]
+      return prev
+    }, {} as Recordable<() => Promise<Recordable>>)
+  }
   const viewReg = view.replace('index', 'Index')
-  return dynamicModules[`../../views/${viewReg}.page.vue`]
+  return dynamicModules[`../../views/${viewReg}.page`]
 }
 
 /**

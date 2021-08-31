@@ -24,12 +24,12 @@ const constantRoutes: AppRouteRecordRaw[] = [
         meta: { title: '控制台', icon: 'DashboardOutlined' },
       },
 
-      {
-        path: 'icons',
-        name: 'SvgIcon',
-        component: () => import('@/views/icons/SvgIcons.page.vue'),
-        meta: { title: 'SvgIcon', icon: 'svg-all' },
-      },
+      // {
+      //   path: 'icons',
+      //   name: 'SvgIcon',
+      //   component: () => import('@/views/icons/SvgIcons.page.vue'),
+      //   meta: { title: 'SvgIcon', icon: 'svg-all' },
+      // },
     ],
   },
   {

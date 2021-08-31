@@ -1,6 +1,6 @@
 import { ColumnProps } from 'ant-design-vue/lib/table/interface'
 import { Slot, toRaw, VNode, withModifiers } from 'vue'
-import { Button, Dropdown, Menu, MenuItem } from 'ant-design-vue'
+import { Button, Dropdown, Menu, MenuItem, TypographyParagraph, TypographyText } from 'ant-design-vue'
 import BaseIcon from '@/components/base-icon/BaseIcon.vue'
 import { colorTypes, ColorType } from '@/settings/color.conf'
 import { RouteLocationRaw } from 'vue-router'
@@ -25,6 +25,7 @@ export type EnhanceColumnProps<T extends Recordable> = Omit<ColumnProps, 'custom
   dataIndex: keyof T
 }
 
+// 定义列表的列
 export const defineColumns = <T extends Recordable>(columns: EnhanceColumnProps<T>[]): EnhanceColumnProps<T>[] => {
   return columns
 }
@@ -114,3 +115,23 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
 }
 
 export const renderGoTo = (text: string, to: RouteLocationRaw) => <GoTo to={to}>{text}</GoTo>
+
+/**
+ * 渲染长文本
+ * @param rows 最大行数
+ * @returns
+ */
+export const renderLongText =
+  (rows: number) =>
+  ({ text }: { text?: string }) => {
+    return text ? <TypographyParagraph ellipsis={{ rows, expandable: true }} content={text} /> : ''
+  }
+
+/**
+ * 渲染可复制的文本
+ * @param param0
+ * @returns
+ */
+export const renderCopyText = ({ text }: { text?: string }) => {
+  return text ? <TypographyParagraph copyable>{text}</TypographyParagraph> : ''
+}

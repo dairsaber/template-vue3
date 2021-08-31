@@ -3,12 +3,62 @@ import { resultSuccess } from '../_util'
 
 const data = [
   {
+    name: 'Task',
+    path: '/task',
+    redirect: '/task/wait',
+    component: 'Layout',
+    meta: { title: '事项管理', icon: 'system', noCache: false, link: null },
+    children: [
+      { name: 'TaskWait', path: 'wait', component: 'biz/task/TaskWait', meta: { title: '待办事项', icon: 'user', noCache: false, link: null } },
+      { name: 'TaskComplete', path: 'complete', component: 'biz/task/TaskComplete', meta: { title: '已办事项', icon: 'user', noCache: false, link: null } },
+    ],
+  },
+  {
+    name: 'Apply',
+    path: '/apply',
+    redirect: '/apply/plan',
+    component: 'Layout',
+    meta: { title: '申报管理', icon: 'system', noCache: false, link: null },
+    children: [
+      { name: 'ApplyPlan', path: 'plan', component: 'biz/apply/ApplyPlan', meta: { title: '计划申报', icon: 'user', noCache: false, link: null } },
+      { name: 'ApplyCheck', path: 'check', component: 'biz/apply/ApplyCheck', meta: { title: '计划审核', icon: 'user', noCache: false, link: null } },
+    ],
+  },
+  {
+    name: 'Object',
+    path: '/object',
+    redirect: '/object/manager',
+    component: 'Layout',
+    meta: { title: '物料管理', icon: 'system', noCache: false, link: null },
+    children: [
+      { name: 'ObjectManager', path: 'manager', component: 'biz/object/ObjectManager', meta: { title: '物料登记', icon: 'user', noCache: false, link: null } },
+      { name: 'ObjectIn', path: 'in', component: 'biz/object/ObjectIn', meta: { title: '物料入库', icon: 'user', noCache: false, link: null } },
+      { name: 'ObjectCheck', path: 'check', component: 'biz/object/ObjectCheck', meta: { title: '入库复核', icon: 'user', noCache: false, link: null } },
+      { name: 'ObjectOut', path: 'out', component: 'biz/object/ObjectOut', meta: { title: '物料出库', icon: 'user', noCache: false, link: null } },
+      { name: 'ObjectMove', path: 'move', component: 'biz/object/ObjectMove', meta: { title: '物料转移', icon: 'user', noCache: false, link: null } },
+      { name: 'ObjectApply', path: 'apply', component: 'biz/object/ObjectApply', meta: { title: '物料申领', icon: 'user', noCache: false, link: null } },
+      { name: 'ObjectBack', path: 'back', component: 'biz/object/ObjectBack', meta: { title: '物料申退', icon: 'user', noCache: false, link: null } },
+      { name: 'ObjectStatistic', path: 'statistic', component: 'biz/object/ObjectStatistic', meta: { title: '物料统计', icon: 'user', noCache: false, link: null } },
+    ],
+  },
+  {
+    name: 'ledger',
+    path: '/ledger',
+    redirect: '/ledger/in',
+    component: 'Layout',
+    meta: { title: '台账管理', icon: 'system', noCache: false, link: null },
+    children: [
+      { name: 'LedgerIn', path: 'in', component: 'biz/object/LedgerIn', meta: { title: '入库台账', icon: 'user', noCache: false, link: null } },
+
+      // TODO
+    ],
+  },
+  {
     name: 'System',
     path: '/system',
     hidden: false,
     redirect: 'noRedirect',
     component: 'Layout',
-    alwaysShow: true,
     meta: { title: '系统管理', icon: 'system', noCache: false, link: null },
     children: [
       { name: 'User', path: 'user', hidden: false, component: 'system/user/UserManager', meta: { title: '用户管理', icon: 'user', noCache: false, link: null } },
@@ -25,7 +75,7 @@ const data = [
         hidden: true,
         redirect: 'noRedirect',
         component: 'ParentView',
-        alwaysShow: true,
+
         meta: { title: '日志管理', icon: 'log', noCache: false, link: null },
         children: [
           { name: 'Operlog', path: 'operlog', hidden: false, component: 'monitor/operlog/index', meta: { title: '操作日志', icon: 'form', noCache: false, link: null } },
@@ -40,7 +90,7 @@ const data = [
     hidden: false,
     redirect: 'noRedirect',
     component: 'Layout',
-    alwaysShow: true,
+
     meta: { title: '系统监控', icon: 'monitor', noCache: false, link: null },
     children: [
       { name: 'Online', path: 'online', hidden: false, component: 'monitor/online/index', meta: { title: '在线用户', icon: 'online', noCache: false, link: null } },
@@ -56,7 +106,7 @@ const data = [
     hidden: true,
     redirect: 'noRedirect',
     component: 'Layout',
-    alwaysShow: true,
+
     meta: { title: '系统工具', icon: 'tool', noCache: false, link: null },
     children: [
       { name: 'Build', path: 'build', hidden: false, component: 'tool/build/index', meta: { title: '表单构建', icon: 'build', noCache: false, link: null } },

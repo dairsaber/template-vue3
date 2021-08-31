@@ -4,7 +4,9 @@
   import Breadcrumb from './components/Breadcrumb.vue'
   import UserDropdown from './components/UserDropdown.vue'
   import Notification from './components/Notification.vue'
+  // import { useRoute } from 'vue-router'
   const collapsed = ref<boolean>(false)
+  // const route = useRoute()
 </script>
 
 <template>
@@ -32,7 +34,11 @@
         </div>
       </a-layout-header>
       <!-- content -->
-      <a-layout-content class="mx-4 my-6">
+      <a-layout-content class="relative mx-4 my-6">
+        <!-- <div class="flex space-x-4">
+          <div class="w-32 h-16 text-lg text-center text-white bg-blue-500 rounded-md shadow-lg leading-16 -top-4">{{ route.meta?.title ?? '其他' }}</div>
+          <div></div>
+        </div> -->
         <router-view />
       </a-layout-content>
     </a-layout>
