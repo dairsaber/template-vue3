@@ -1,32 +1,11 @@
 <script lang="ts" setup>
-  import { ref, toRaw, watch } from 'vue'
   import { ApplyPlan } from '@/apis/biz/model/apply.model'
-  // 定义事件
-  const emit = defineEmits(['update:params', 'search', 'reset'])
-  const paramsRef = ref<Partial<ApplyPlan> & QueryParams>({})
+  import { useSearchBar } from '@/hooks/search/useSearchBar'
 
   const props = defineProps<{ params: QueryParams }>()
-  watch(
-    () => props.params,
-    (val) => {
-      paramsRef.value = val
-    },
-    {
-      immediate: true,
-    }
-  )
+  const emit = defineEmits(['update:params', 'search', 'reset'])
 
-  const updateParams = () => {
-    emit('update:params', toRaw(paramsRef.value))
-  }
-  const handleSearch = () => {
-    updateParams()
-    emit('search')
-  }
-  const handleReset = () => {
-    updateParams()
-    emit('reset')
-  }
+  const { paramsRef, handleSearch, handleReset } = useSearchBar<ApplyPlan>(emit, props)
 </script>
 
 <template>

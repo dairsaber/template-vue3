@@ -1,5 +1,5 @@
 // 通用的model类型声明
-declare type QueryParams = Recordable<string | number | null | undefined | boolean>
+declare type QueryParams = Recordable<string | number | null | undefined>
 
 declare type PaginationList<T = unknown> = {
   rows: T[]

@@ -2,6 +2,7 @@ import BaseIcon from '@/components/base-icon/BaseIcon.vue'
 import BaseList from '@/components/base-list/BaseList.vue'
 import BaseSearch from '@/components/base-search'
 import { DictSelect, DictTag } from '@/components/dict'
+import BaseDetail from '@/components/base-detail/BaseDetail.vue'
 import GoTo from '@/components/go-to/GoTo.vue'
 
 import { App } from 'vue'
@@ -14,4 +15,5 @@ export const setupComponents = (app: App<Element>) => {
   app.component(DictSelect.name ?? 'DictSelect', DictSelect)
   app.component(DictTag.name ?? 'DictTag', DictTag)
   app.component(GoTo.name ?? 'GoTo', GoTo)
+  app.component(BaseDetail.name ?? 'BaseDetail', BaseDetail)
 }

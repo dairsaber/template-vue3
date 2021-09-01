@@ -22,7 +22,7 @@
           return AntIcon.value
         } else {
           return (
-            <svg style={attrs.style as CSSProperties | string} class="svg-icon anticon" aria-hidden="true">
+            <svg style={attrs.style as CSSProperties | string} class="mr-1 svg-icon" aria-hidden="true">
               <use xlinkHref={iconName.value} fill="currentColor" />
             </svg>
           )

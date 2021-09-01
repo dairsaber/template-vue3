@@ -5,6 +5,7 @@ import BaseIcon from '@/components/base-icon/BaseIcon.vue'
 import { colorTypes, ColorType } from '@/settings/color.conf'
 import { RouteLocationRaw } from 'vue-router'
 import GoTo from '@/components/go-to/GoTo.vue'
+import { isNumber, isObject } from '@/utils/is'
 
 export type CustomRenderParams<T extends Recordable = Recordable> = {
   text: string
@@ -30,13 +31,27 @@ export const defineColumns = <T extends Recordable>(columns: EnhanceColumnProps<
   return columns
 }
 
+export function getOperation<T extends Recordable>(options: Operation<T>[], config?: Partial<EnhanceColumnProps<T>>): EnhanceColumnProps<T>
+export function getOperation<T extends Recordable>(options: Operation<T>[], splitNumber?: number): EnhanceColumnProps<T>
+export function getOperation<T extends Recordable>(options: Operation<T>[], splitNumber: number, config?: Partial<EnhanceColumnProps<T>>): EnhanceColumnProps<T>
 /**
  * 返回 columns operation操作项
  * @param options 操作配置
  * @param splitNumber 分割位置 从第二个操作分割还是什么的
  * @returns {CustomRenderParams}
  */
-export const getOperation = <T extends Recordable>(options: Operation<T>[], splitNumber = 2): EnhanceColumnProps<T> => {
+export function getOperation<T extends Recordable>(options: Operation<T>[], arg2?: Partial<EnhanceColumnProps<T>> | number, config?: Partial<EnhanceColumnProps<T>>): EnhanceColumnProps<T> {
+  let splitNumber = 2
+  let currentConfig = {} as Partial<EnhanceColumnProps<T>>
+
+  if (isNumber(arg2)) {
+    splitNumber = arg2
+  } else if (isObject(arg2)) {
+    currentConfig = arg2
+  } else if (isObject(config)) {
+    currentConfig = config
+  }
+
   const flatParts = options.slice(0, splitNumber)
   const mixParts = options.slice(splitNumber)
   if (flatParts.length === 0) {
@@ -53,7 +68,7 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
         type="dashed"
         onClick={withModifiers(() => {
           option.action(record)
-        }, ['self'])}
+        }, ['stop'])}
         size="small"
         style={{ color: getType(option.type), whiteSpace: 'nowrap' }}
         v-slots={{ icon: () => <BaseIcon icon={option.icon} /> }}
@@ -79,7 +94,6 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
           overlay: () => (
             <Menu
               onClick={({ key }) => {
-                console.log(`key`, key)
                 mixParts[key]?.action(record)
               }}
             >
@@ -111,10 +125,15 @@ export const getOperation = <T extends Recordable>(options: Operation<T>[], spli
         </div>
       )
     },
+    ...currentConfig,
   }
 }
 
-export const renderGoTo = (text: string | VNode, to: RouteLocationRaw) => <GoTo to={to}>{text}</GoTo>
+export const renderGoTo = (text: string | VNode, to: RouteLocationRaw) => (
+  <GoTo class="whitespace-nowrap" to={to}>
+    {text}
+  </GoTo>
+)
 
 /**
  * 渲染长文本
