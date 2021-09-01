@@ -1,28 +1,26 @@
 <script lang="tsx">
   import { isString, isFunction, isObject } from '@/utils/is'
-
-  import { computed, defineComponent, isVNode, VNode } from 'vue'
-  export type Cell =
-    | {
-        label: string | VNode | Fn<any, string | VNode>
-        valueRender?: Fn<any, any>
-        span?: number
-      }
-    | string
-    | VNode
-    | Fn<any, string | VNode>
-  type ComponentProps = {
-    dataSource?: Recordable
-    cells: Recordable<Cell>
-  }
+  import { Descriptions } from 'ant-design-vue'
+  import { computed, defineComponent, isVNode, PropType, VNode, h } from 'vue'
+  import { Cell } from './types'
 
   export default defineComponent({
     name: 'BaseDetail',
-    setup(props: ComponentProps, { attrs }) {
+
+    props: {
+      dataSource: {
+        type: Object as PropType<Nullable<Recordable>>,
+      },
+      cells: {
+        type: [String, Object, Function] as PropType<Recordable<Cell>>,
+        required: true,
+      },
+    },
+    setup(props, { attrs }) {
       const valueRenderer = (value: any) => value // 渲染值的默认函数
 
       const descriptionItems = computed((): VNode[] => {
-        const cells = props.cells
+        const cells = props.cells as Recordable<Cell>
         const items: VNode[] = []
         Object.keys(cells).forEach((cellKey) => {
           const cellItem = cells[cellKey]
@@ -61,11 +59,7 @@
         return items
       })
 
-      return () => (
-        <a-descriptions v-bind={attrs} bordered>
-          {descriptionItems.value}
-        </a-descriptions>
-      )
+      return () => h(Descriptions, { bordered: true, ...attrs }, { default: () => descriptionItems.value })
     },
   })
 </script>
