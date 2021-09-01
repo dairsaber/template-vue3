@@ -27,4 +27,13 @@ export type ApplyPlan = {
   status: string
   // 备注
   remark: string
+
+  // 制单部门
+  formCreateDept: string
+  // 制单人
+  formCreateUser: string
+  // 申报班组
+  applyGroup: string
+  // 物料类型
+  objectType: string
 }

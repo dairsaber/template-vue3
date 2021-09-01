@@ -6,6 +6,7 @@
   type Title = string | Fn<Nullable<ApplyPlan>, Nullable<string>>
 
   const attrs = useAttrs()
+
   const props = defineProps({
     title: [String, Function] as PropType<Title>,
     dataSource: {
@@ -29,9 +30,7 @@
 </script>
 
 <template>
-  <a-modal :title="title" v-bind="attrs" @ok="handleOk" :maskClosable="false" :width="1200">
+  <a-modal :title="title" v-bind="attrs" @ok="handleOk" maskClosable :width="1200" :footer="null">
     <PlanDetail :dataSource="dataSource" />
   </a-modal>
 </template>
-
-<style lang="scss" scoped></style>
