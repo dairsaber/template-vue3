@@ -32,7 +32,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     // setup增强
     vueSetupExtend(),
     viteComponents({
-      globalComponentsDeclaration: pathResolve('../../../types/components.d.ts'),
+      // globalComponentsDeclaration: pathResolve('../../../types/components.d.ts'),
       customComponentResolvers: [AntDesignVueResolver()],
     }),
     viteSvgIcons({
