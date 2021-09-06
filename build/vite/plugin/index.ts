@@ -9,7 +9,7 @@ import { configMockPlugin } from './mock'
 // import { configImageminPlugin } from './imagemin'
 import { configCompressPlugin } from './compress'
 
-import viteComponents, { AntDesignVueResolver } from 'vite-plugin-components'
+import viteComponents from 'vite-plugin-components'
 import viteSvgIcons from 'vite-plugin-svg-icons'
 import path from 'path'
 // 解析文件夹
@@ -32,8 +32,9 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     // setup增强
     vueSetupExtend(),
     viteComponents({
+      // TODO 动态加载 组件
       // globalComponentsDeclaration: pathResolve('../../../types/components.d.ts'),
-      customComponentResolvers: [AntDesignVueResolver()],
+      // customComponentResolvers: [AntDesignVueResolver()],
     }),
     viteSvgIcons({
       iconDirs: [pathResolve('../../../src/assets/icons')],

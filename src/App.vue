@@ -1,10 +1,5 @@
 <template>
-  <ConfigProvider :locale="zh_CN">
-    <router-view />
-  </ConfigProvider>
+  <router-view />
 </template>
 
-<script setup lang="ts">
-  import zh_CN from 'ant-design-vue/lib/locale/zh_CN'
-  import { ConfigProvider } from 'ant-design-vue'
-</script>
+<script setup lang="ts"></script>
