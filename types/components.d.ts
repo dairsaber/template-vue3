@@ -23,7 +23,7 @@ declare module 'vue' {
     ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
-    AModal: typeof import('ant-design-vue/es')['Modal']
+    AModal: Partial<typeof import('ant-design-vue/es')['Modal']>
     AppProvider: typeof import('./../src/components/app-provider/AppProvider.vue')['default']
     ARow: typeof import('ant-design-vue/es')['Row']
     ASelect: typeof import('ant-design-vue/es')['Select']
@@ -46,4 +46,4 @@ declare module 'vue' {
   }
 }
 
-export { }
+export {}
