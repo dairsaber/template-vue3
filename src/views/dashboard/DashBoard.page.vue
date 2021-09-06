@@ -21,8 +21,8 @@
 
 <template>
   <div class="display">{{ dateStr }}</div>
-  <a-button type="primary">这是测试</a-button>
-  <a-button type="primary" @click="handleLogout">logout</a-button>
+
+  <a @click="handleLogout">logout</a>
 </template>
 
 <style lang="scss" scoped>

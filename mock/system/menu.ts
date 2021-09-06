@@ -3,48 +3,6 @@ import { resultSuccess } from '../_util'
 
 const data = [
   {
-    name: 'Task',
-    path: '/task',
-    redirect: '/task/wait',
-    component: 'Layout',
-    meta: { title: '事项管理', icon: 'svg-notification', noCache: false, link: null },
-    children: [
-      {
-        name: 'TaskWait',
-        path: 'wait',
-        component: 'biz/task/TaskWait',
-        meta: { title: '待办事项', icon: 'svg-notification', noCache: false, link: null },
-      },
-      {
-        name: 'TaskComplete',
-        path: 'complete',
-        component: 'biz/task/TaskComplete',
-        meta: { title: '已办事项', icon: 'svg-notification', noCache: false, link: null },
-      },
-    ],
-  },
-  {
-    name: 'Apply',
-    path: '/apply',
-    redirect: '/apply/plan',
-    component: 'Layout',
-    meta: { title: '申报管理', icon: 'SolutionOutlined', noCache: false, link: null },
-    children: [
-      {
-        name: 'ApplyPlan',
-        path: 'plan',
-        component: 'biz/apply/ApplyPlan',
-        meta: { title: '计划申报', icon: 'SolutionOutlined', noCache: false, link: null },
-      },
-      {
-        name: 'ApplyCheck',
-        path: 'check',
-        component: 'biz/apply/ApplyCheck',
-        meta: { title: '申报审核', icon: 'SolutionOutlined', noCache: false, link: null },
-      },
-    ],
-  },
-  {
     name: 'System',
     path: '/system',
     hidden: false,

@@ -57,7 +57,7 @@ export default ({ mode, command }: ConfigEnv): UserConfigExport => {
     },
     plugins: createVitePlugins(viteEnv, isBuild),
     optimizeDeps: {
-      include: ['ant-design-vue/es/locale/zh_CN', 'moment/dist/locale/zh-cn', 'ant-design-vue/es/locale/en_US', 'moment/dist/locale/eu'],
+      include: [],
       exclude: ['vue-demi'],
     },
   })
